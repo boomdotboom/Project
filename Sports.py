@@ -86,10 +86,10 @@ create_tables()
 add_game(1, 2, 29, 21, 17,'2024-04-15')
 
     # Add a player
-add_player(29, 'Tom Brady', 'Quarterback')
+add_player(1,29, 'Tom Brady', 'Quarterback')
 
     # View players on a team
-print(view_players_on_team(1))
+print(view_players_on_team(29))
 
     # View players by position
 print(view_players_by_position('Quarterback'))
@@ -99,6 +99,8 @@ print(view_teams_by_conference())
 
     # View games by team
 print(view_games_by_team(1))
+print("in progress")
 
     # View results by date
 print(view_results_by_date('2024-04-15'))
+print("in progress")
