@@ -53,7 +53,7 @@ def create_tables():
                        (30,'New York','Jets','AFC','East'), (31,'Pittsburgh','Steelers','AFC','North'),
                        (32,'Tennessee','Titans','AFC','South')''')
 def add_game(game_id, team1_id, team2_id, score1, score2, date):
-        cursor.execute(f"INSERT INTO Game (GameId ,TeamId1, TeamId2, Score1, Score2, Date) VALUES ({game_id},{team1_id},{team2_id},{score1},{score2},{date})")
+        cursor.execute(f"INSERT INTO Game (GameId ,TeamId1, TeamId2, Score1, Score2, Date) VALUES ({game_id},{team1_id},{team2_id},{score1},{score2},'{date}')")
 
 def add_player( team_id, name, position):
         cursor.execute(f"INSERT INTO Player (TeamId, Name, Position) VALUES ('{team_id}','{name}', '{position}')")
