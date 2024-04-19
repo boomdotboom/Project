@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/substyles.css">
+    <title>View Players By Team</title>
+</head>
+<body>
+    <div class="options-box">
+        <h1>View Players By Team</h1>
+        <form action="../php/view_players_by_team.php" method="post">
+            <div class="form-group">
+                <label for="teamID">Team ID:</label>
+                <input type="text" id="teamID" name="teamID" required><br><br>
+            </div>
+
+            <button type="submit">Submit</button>
+
+        </form>
+    </div>
+    <a href="home.html">Home</a>
+</body>
+</html>

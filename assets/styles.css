@@ -1,0 +1,52 @@
+body {
+    background-color: #79cbcc;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #10353B;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 30px;
+}
+
+h2 {
+    color: #10353B;
+    font-size: 30px;
+    text-align: center;
+}
+
+h3 {
+    color: #10353B;
+    font-size: 15px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.options-box {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    padding: 20px;
+    margin: auto;
+    max-width: 600px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.options-box button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #265961;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #10353B;
+}
+
