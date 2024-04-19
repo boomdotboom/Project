@@ -53,13 +53,13 @@ def create_tables():
                        (30,'New York','Jets','AFC','East'), (31,'Pittsburgh','Steelers','AFC','North'),
                        (32,'Tennessee','Titans','AFC','South')''')
 def add_game( game_id, team1_id, team2_id, score1, score2, date):
-        cursor.execute(f"INSERT INTO Game (GameId ,TeamId1, TeamId2, Score1, Score2, Date) VALUES ({game_id},{team1_id},{team2_id},{score1},{score2},'{date}')")
+        cursor.execute(f"INSERT INTO Game (GameId ,TeamId1, TeamId2, Score1, Score2, Date) VALUES ({game_id},{team1_id},{team2_id},{score1},{score2},{date})")
 
 def add_player( team_id, name, position):
         cursor.execute(f"INSERT INTO Player (TeamId, Name, Position) VALUES ('{team_id}','{name}', '{position}')")
 
 def view_players_on_team(team_id):
-        cursor.execute(f"SELECT Nickname, PlayerId, Name, Postion  FROM Team,Player WHERE Team.TeamID= Player.TeamID AND TeamId = '{team_id}'")
+        cursor.execute(f"SELECT Nickname, PlayerId, Name, Postion  FROM Team,Player WHERE Team.TeamID= Player.TeamID AND TeamId = {team_id}")
         return cursor.fetchall()
 
 def view_players_by_position(position):
@@ -71,11 +71,11 @@ def view_teams_by_conference():
         return cursor.fetchall()
 
 def view_games_by_team( team_id):
-        cursor.execute("SELECT G.*, T1.Location, T1.Nickname AS Team1_Nickname, T2.Location, T2.Nickname AS Team2_Nickname")
+        cursor.execute("")
         return cursor.fetchall()
 
 def view_results_by_date(date):
-        cursor.execute("SELECT T.Location, T.Nickname, G.Score1, G.Score2,")
+        cursor.execute("")
         return cursor.fetchall()
 
 def __del__():
@@ -83,7 +83,7 @@ def __del__():
 
     # Add a game
 create_tables()
-add_game(1, 29, 21, 17, '2024-04-15')
+add_game(1, 29, 21, 17,'2024-04-15')
 
     # Add a player
 add_player(29, 'Tom Brady', 'Quarterback')
