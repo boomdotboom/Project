@@ -55,8 +55,8 @@ def create_tables():
 def add_game(game_id, team1_id, team2_id, score1, score2, date):
         cursor.execute(f"INSERT INTO Game (GameId ,TeamId1, TeamId2, Score1, Score2, Date) VALUES ({game_id},{team1_id},{team2_id},{score1},{score2},'{date}')")
 
-def add_player( team_id, name, position):
-        cursor.execute(f"INSERT INTO Player (TeamId, Name, Position) VALUES ('{team_id}','{name}', '{position}')")
+def add_player(player_id,team_id, name, position):
+        cursor.execute(f"INSERT INTO Player (PlayerID,TeamId, Name, Position) VALUES ({player_id},{team_id},'{name}', '{position}')")
 
 def view_players_on_team(team_id):
         cursor.execute(f"SELECT Nickname, PlayerId, Name, Postion  FROM Team,Player WHERE Team.TeamID= Player.TeamID AND TeamId = {team_id}")
