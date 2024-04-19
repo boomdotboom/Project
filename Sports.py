@@ -41,16 +41,16 @@ def create_tables():
                        (6,'Detriot','Lions','NFC','North'), (7,'Green Bay','Packers','NFC','North'), 
                        (8,'Los Angeles','Rams','NFC','West'), (9,'Minnesota','Vikings','NFC', 'North'),
                        (10,'New Orleans','Saints','NFC','South'), (11,'New York','Giants','NFC','East'),
-                       (12,'Philadelphia','Eagles','NFC','East'),(13,'San Francisco','49ers','NFC','West'),
-                       (14,'Seattle','Seahawks','NFC','West'),(15, 'Tampa Bay','Buccaneers','NFC','South'),
-                       (16, 'Washington','Commanders','NFC','East'),(17, 'Baltimore','Ravens','AFC','North'),
-                       (18,'Buffalo','Bills','AFC','East'),(19,'Cincinnati','Bengals','AFC','North'),
-                       (20,'Cleveland','Browns','AFC','North'),(21,'Denver','Broncos','AFC','South'),
+                       (12,'Philadelphia','Eagles','NFC','East'), (13,'San Francisco','49ers','NFC','West'),
+                       (14,'Seattle','Seahawks','NFC','West'), (15, 'Tampa Bay','Buccaneers','NFC','South'),
+                       (16, 'Washington','Commanders','NFC','East'), (17, 'Baltimore','Ravens','AFC','North'),
+                       (18,'Buffalo','Bills','AFC','East'), (19,'Cincinnati','Bengals','AFC','North'),
+                       (20,'Cleveland','Browns','AFC','North'), (21,'Denver','Broncos','AFC','South'),
                        (22,'Houston','Texans','AFC','South'), (23,'Indianapolis','Colts','AFC','South'),
                        (24,'Jacksonville','Jaguars','AFC','South'), (25,'Kansas City','Chiefs','AFC','West'),
-                       (26,'Las Vegas','Raiders','AFC','West'),(27,'Los Angeles','Chargers','AFC','West'),
+                       (26,'Las Vegas','Raiders','AFC','West'), (27,'Los Angeles','Chargers','AFC','West'),
                        (28,'Miami','Dolphins','AFC','East'), (29,'New England','Patriots','AFC','East'),
-                       (30,'New York','Jets','AFC','East'),(31,'Pittsburgh','Steelers','AFC','North'),
+                       (30,'New York','Jets','AFC','East'), (31,'Pittsburgh','Steelers','AFC','North'),
                        (32,'Tennessee','Titans','AFC','South')''')
 def add_game( team1_id, team2_id, score1, score2, date):
         cursor.execute(f"INSERT INTO Game (TeamId1, TeamId2, Score1, Score2, Date) VALUES ({team1_id},'{team2_id}','{score1}','{score2}','{date}')")
