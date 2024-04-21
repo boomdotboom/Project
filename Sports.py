@@ -34,12 +34,6 @@ def create_tables():
                                     Position TEXT,
                                     FOREIGN KEY (TeamId) REFERENCES Team(TeamId)
                                 )''')
-        cursor.execute('''CREATE TABLE WINS (
-                                    TeamId INTEGER PRIMARY KEY,
-                                    Wins INTEGER,
-                                    Loses INTEGER,
-                                    FOREIGN KEY (TeamId) REFERENCES Team(TeamId)
-                                )''')
         cursor.execute('''INSERT INTO Team (TeamID,Location, Nickname, Conference, Division) VALUES 
                        (1, 'Arizona', 'Cardinals', 'NFC', 'West'),
                        (2, 'Alanta','Falcons','NFC', 'South'), (3, 'Carolina','Panthers','NFC','South'),
@@ -76,12 +70,12 @@ def view_teams_by_conference():
         cursor.execute("SELECT * FROM Team ORDER BY Conference, Nickname ASC")
         return cursor.fetchall()
 
-def view_games_by_team(team_id):
-        cursor.execute(f"SELECT Location, Nickname, Score1, TeamID1 FROM Game INNER JOIN Team on Team.TeamID= Game.TeamId1 AND Team.TeamID= Game.TeamID2")
+def view_games_by_team(team_id): # The Problem CHILDREN
+        cursor.execute(f"SELECT Location, Nickname, Score1, FROM Game JOIN Team on Team.TeamID= Game.TeamId1 AND Team.TeamID= Game.TeamID2")
         return cursor.fetchall()
 
-def view_results_by_date(date):
-        cursor.execute("SELECT ")
+def view_results_by_date(date):# The Problem CHILDREN
+        cursor.execute(f"SELECT TeamId1, Score1, TeamId2, Score2, Date, IF(Score1>Score2, TeamId1, TeamId2) FROM Game Where EXISTS(SELECT Location, Nickname FROM Team WHERE Team.TeamId= Game.TeamId1) AND Date='{date}'")
         return cursor.fetchall()
 
 def __del__():
@@ -89,22 +83,22 @@ def __del__():
 
     # Add a game
 create_tables()
-add_game(1, 2, 29, 21, 17,'2024-04-15')
+#add_game(1, 2, 29, 21, 17,'2024-04-15')
 
     # Add a player
-add_player(1,29,'Tom Brady','Quarterback')
+#add_player(1,29,'Tom Brady','Quarterback')
 
     # View players on a team
-print(view_players_on_team(29))
+#print(view_players_on_team(29))
 
     # View players by position
-print(view_players_by_position('Quarterback'))
+#print(view_players_by_position('Quarterback'))
 
     # View teams by conference
-print(view_teams_by_conference())
+#print(view_teams_by_conference())
 
     # View games by team
-print(view_games_by_team(2))
+#print(view_games_by_team(2))
 print("in progress")
 
     # View results by date
