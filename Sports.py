@@ -34,6 +34,12 @@ def create_tables():
                                     Position TEXT,
                                     FOREIGN KEY (TeamId) REFERENCES Team(TeamId)
                                 )''')
+        cursor.execute('''CREATE TABLE WINS (
+                                    TeamId INTEGER PRIMARY KEY,
+                                    Wins INTEGER,
+                                    Loses INTEGER,
+                                    FOREIGN KEY (TeamId) REFERENCES Team(TeamId)
+                                )''')
         cursor.execute('''INSERT INTO Team (TeamID,Location, Nickname, Conference, Division) VALUES 
                        (1, 'Arizona', 'Cardinals', 'NFC', 'West'),
                        (2, 'Alanta','Falcons','NFC', 'South'), (3, 'Carolina','Panthers','NFC','South'),
@@ -56,10 +62,10 @@ def add_game(game_id, team1_id, team2_id, score1, score2, date):
         cursor.execute(f"INSERT INTO Game (GameId ,TeamId1, TeamId2, Score1, Score2, Date) VALUES ({game_id},{team1_id},{team2_id},{score1},{score2},'{date}')")
 
 def add_player(player_id,team_id, name, position):
-        cursor.execute(f"INSERT INTO Player (PlayerID,TeamId, Name, Position) VALUES ({player_id},{team_id},'{name}', '{position}')")
+        cursor.execute(f"INSERT INTO Player (PlayerID ,TeamId, Name, Position) VALUES ({player_id},{team_id},'{name}', '{position}')")
 
 def view_players_on_team(team_id):
-        cursor.execute(f"SELECT Nickname, PlayerId, Name, Postion  FROM Team,Player WHERE Team.TeamID= Player.TeamID AND TeamId = {team_id}")
+        cursor.execute(f"SELECT Nickname, PlayerId, Name, Position FROM Team,Player WHERE Player.TeamId = {team_id} AND Team.TeamID= {team_id}")
         return cursor.fetchall()
 
 def view_players_by_position(position):
@@ -67,15 +73,15 @@ def view_players_by_position(position):
         return cursor.fetchall()
 
 def view_teams_by_conference():
-        cursor.execute("SELECT * FROM Team ORDER BY Conference ASC")
+        cursor.execute("SELECT * FROM Team ORDER BY Conference, Nickname ASC")
         return cursor.fetchall()
 
-def view_games_by_team( team_id):
-        cursor.execute("")
+def view_games_by_team(team_id):
+        cursor.execute(f"SELECT Location, Nickname, Score1, TeamID1 FROM Game INNER JOIN Team on Team.TeamID= Game.TeamId1 AND Team.TeamID= Game.TeamID2")
         return cursor.fetchall()
 
 def view_results_by_date(date):
-        cursor.execute("")
+        cursor.execute("SELECT ")
         return cursor.fetchall()
 
 def __del__():
@@ -86,7 +92,7 @@ create_tables()
 add_game(1, 2, 29, 21, 17,'2024-04-15')
 
     # Add a player
-add_player(1,29, 'Tom Brady', 'Quarterback')
+add_player(1,29,'Tom Brady','Quarterback')
 
     # View players on a team
 print(view_players_on_team(29))
@@ -98,7 +104,7 @@ print(view_players_by_position('Quarterback'))
 print(view_teams_by_conference())
 
     # View games by team
-print(view_games_by_team(1))
+print(view_games_by_team(2))
 print("in progress")
 
     # View results by date
