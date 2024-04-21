@@ -71,11 +71,22 @@ def view_teams_by_conference():
         return cursor.fetchall()
 
 def view_games_by_team(team_id): # The Problem CHILDREN
-        cursor.execute(f"SELECT Location, Nickname, Score1, FROM Game JOIN Team on Team.TeamID= Game.TeamId1 AND Team.TeamID= Game.TeamID2")
+        cursor.execute(f'''SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, 
+                       IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result 
+                       FROM Game g 
+                            JOIN Team t1 on t1.TeamId= g.TeamId1 
+                            JOIN Team t2 on t2.TeamId= g.TeamId2 
+                                WHERE g.TeamId1= {team_id} 
+                                    OR g.teamId2= {team_id}''')
         return cursor.fetchall()
 
 def view_results_by_date(date):# The Problem CHILDREN
-        cursor.execute(f"SELECT TeamId1, Score1, TeamId2, Score2, Date, IF(Score1>Score2, TeamId1, TeamId2) FROM Game Where EXISTS(SELECT Location, Nickname FROM Team WHERE Team.TeamId= Game.TeamId1) AND Date='{date}'")
+        cursor.execute('''SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, 
+            IF(g.Score1>g.Score2, Concat(t1.Nickname," Won"),Concat(t1.Nickname," Lost")) AS Result 
+                FROM Game g 
+                    JOIN Team t1 on t1.TeamId= g.TeamId1 
+                    JOIN Team t2 on t2.TeamId= g.TeamId2 
+                        WHERE g.date= '{date}' ''')
         return cursor.fetchall()
 
 def __del__():
@@ -83,7 +94,7 @@ def __del__():
 
     # Add a game
 create_tables()
-#add_game(1, 2, 29, 21, 17,'2024-04-15')
+add_game(1, 2, 29, 21, 17,'2024-04-15')
 
     # Add a player
 #add_player(1,29,'Tom Brady','Quarterback')
@@ -98,7 +109,7 @@ create_tables()
 #print(view_teams_by_conference())
 
     # View games by team
-#print(view_games_by_team(2))
+print(view_games_by_team(2))
 print("in progress")
 
     # View results by date
