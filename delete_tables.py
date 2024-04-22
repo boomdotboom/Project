@@ -11,3 +11,4 @@ mydb = mysql.connector.connect(
 cursor = mydb.cursor()
 def delete_tables():
     cursor.execute("DROP TABLE Game, Player, Team")
+delete_tables()
