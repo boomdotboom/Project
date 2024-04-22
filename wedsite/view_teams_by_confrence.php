@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,7 @@
 <body>
     <div class="options-box">
         <h1>View Teams</h1>
-        <form action="../php/view_teams_by_confrence.php" method="post">
+        <form action="view_teams_by_confrence.php" method="post">
 
             <div class="form-group">
                 <label for="confrence">Confrence:</label>
@@ -24,3 +23,22 @@
     <a href="home.html">Home</a>
 </body>
 </html>
+
+
+<?php
+if (isset($_POST['submit'])) 
+{
+    // add ' ' around multiple strings so they are treated as single command line args
+    $data = escapeshellarg($_POST['confrence']); #data
+
+    // build the linux command that you want executed;  
+    $command = 'python3 Sports.py ' . $data;
+
+    // remove dangerous characters from command to protect web server
+    $command = escapeshellcmd($command);
+ 
+    // echo then run the command
+    echo "command: $command <br>";
+    system($command);           
+}
+?>

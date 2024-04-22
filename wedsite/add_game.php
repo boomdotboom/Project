@@ -9,7 +9,7 @@
 <body>
     <div class="options-box">
         <h1>Add a Game</h1>
-        <form action="../php/add_game.php" method="post">
+        <form action="add_game.php" method="post">
             <div class="form-group">
                 <label for="teamID1">Team 1 ID:</label>
                 <input type="text" id="teamID1" name="teamID1" required><br><br>

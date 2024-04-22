@@ -2,7 +2,7 @@
 <body>
 <h3>Enter your name:</h3>
 
-<form action="php/home.php" method="post">
+<form action="home.php" method="post">
     Name: <input type="text" name="name"><br>
     <input name="submit" type="submit" >
 </form>
