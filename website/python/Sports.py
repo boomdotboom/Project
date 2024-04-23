@@ -12,6 +12,7 @@ def open_database():
     global cursor
     cursor = mydb.cursor()
 
+
 def create_tables():
         cursor.execute('''CREATE TABLE Team (
                                     TeamId INTEGER PRIMARY KEY,

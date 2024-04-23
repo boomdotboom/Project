@@ -1,3 +1,5 @@
+import mysql.connector
+import sys
 import Sports
 import sys
 import traceback
