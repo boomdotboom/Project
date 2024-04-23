@@ -5,20 +5,62 @@
     <title>Add Game</title>
     <link rel="stylesheet" type="text/css" href="../style/add_game.css"> 
     <link rel="stylesheet" type="text/css" href="../style/carousel.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/substyles.css">
 </head>
 <body>
-    <h3>Enter information about a game to add to the database:</h3>
+    <div class="options-box">
+        <h1>Add Game:</h1>
+        <form action="add_game.php" method="post">
+            <div class="form-group">
+                <label for="gameID">Game ID:</label>
+                <input type="text" id="gameID" name="gameID" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+            <div class="form-group">
+                <label for="team1">Team 1 ID:</label>
+                <input type="text" id="team1" name="team1" required>
+            </div>
+            <div class="form-group">
+                <label for="score1">Team 1 Score:</label>
+                <input type="text" id="score1" name="score1" required>
+            </div>
+            <div class="form-group">
+                <label for="team2">Team 2 ID:</label>
+                <input type="text" id="team2" name="team2" required>
+            </div>
+            <div class="form-group">
+                <label for="score2">Team 2 Score:</label>
+                <input type="text" id="score2" name="score2" required>
+            </div>
+            
+            <input name="submit" type="submit" >
+        </form>
+    </div>
 
-    <form action="add_game.php" method="post">
-        GameID: <input type="text" name="gameID"><br>
-        Date: <input type="date" name="date"><br>
-        TeamId1: <input type="text" name="team1"><br>
-        Score1: <input type="text" name="score1"><br>
-        TeamId2: <input type="text" name="team2"><br>
-        Score2: <input type="text" name="score2"><br>
-        
-        <input name="submit" type="submit" >
-    </form>
+    <br><br>
+    <a href="home.html">Home</a>
+
+    <script>
+        function validateForm() {
+            var form = document.getElementById("addPlayerForm");
+            var inputs = form.getElementsByTagName("input");
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].value.trim() === "") {
+                    alert("Please fill out all the fields.");
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
 
