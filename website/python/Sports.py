@@ -5,9 +5,9 @@ def open_database():
     global mydb
     mydb = mysql.connector.connect(
     host="localhost",
-    user="aemorton",
-    password="eT5wisee",
-    database= "aemorton"
+    user="cps019",
+    password="CollegeIs#1$",
+    database= "cps019"
     ) 
     global cursor
     cursor = mydb.cursor()
@@ -20,7 +20,7 @@ def create_tables():
                                     Nickname TEXT,
                                     Conference TEXT,
                                     Division TEXT
-                                )''')
+                                );''')
         cursor.execute('''CREATE TABLE Game (
                                     GameId INTEGER PRIMARY KEY,
                                     TeamId1 INTEGER,
@@ -30,7 +30,7 @@ def create_tables():
                                     Date DATE,
                                     FOREIGN KEY (TeamId1) REFERENCES Team(TeamId),
                                     FOREIGN KEY (TeamId2) REFERENCES Team(TeamId)
-                                )''')
+                                );''')
         cursor.execute('''CREATE TABLE Player (
                                     PlayerId INTEGER,
                                     TeamId INTEGER,
@@ -38,7 +38,7 @@ def create_tables():
                                     Position TEXT,
                                     CONSTRAINT  PK_Player PRIMARY KEY(PlayerId, TeamId),
                                     FOREIGN KEY (TeamId) REFERENCES Team(TeamId)
-                                )''')
+                                );''')
         cursor.execute('''INSERT INTO Team (TeamID,Location, Nickname, Conference, Division) VALUES 
                        (1, 'Arizona', 'Cardinals', 'NFC', 'West'),
                        (2, 'Alanta','Falcons','NFC', 'South'), (3, 'Carolina','Panthers','NFC','South'),
@@ -56,7 +56,7 @@ def create_tables():
                        (26,'Las Vegas','Raiders','AFC','West'), (27,'Los Angeles','Chargers','AFC','West'),
                        (28,'Miami','Dolphins','AFC','East'), (29,'New England','Patriots','AFC','East'),
                        (30,'New York','Jets','AFC','East'), (31,'Pittsburgh','Steelers','AFC','North'),
-                       (32,'Tennessee','Titans','AFC','South')''')
+                       (32,'Tennessee','Titans','AFC','South');''')
         cursor.execute('''INSERT INTO Player(PlayerId, TeamId, Name, Position) VALUES 
                        (9,1,'Desmond Ridder','Quarterback'),(22,1,'Michael Carter','Running back'),(34,1,'Jalen Thompson','Safety'),
                        (18,2,'Kirk Cousins','Quarterback'),(28,2,'Carlos Washington Jr.','Running back'),(27,2,'Richie Grant','Safety'),
@@ -89,45 +89,46 @@ def create_tables():
                        (4,29,'Bailey Zappe','Quarterback'),(39,29,'JaMycal Hasty','Running back'),(5,29,'Jabrill Peppers','Safety'),
                        (8,30,'Aaron Rodgers','Quarterback'),(20,30,'Breece Hall','Running back'),(4,30,'D.J. Reed','Safety'),
                        (4,31,'Kyle Allen','Quarterback'),(22,31,'Najee Harris','Running back'),(33,31,'Nathan Meadors','Safety'),
-                       (8,32,'Will Levis','Quarterback'),(36,32,'Julius Chestnut','Running back'),(44,32,'Mike Brown','Safety')
+                       (8,32,'Will Levis','Quarterback'),(36,32,'Julius Chestnut','Running back'),(44,32,'Mike Brown','Safety');
                        ''')
         mydb.commit()
 def add_game(game_id, team1_id, team2_id, score1, score2, date):
-        cursor.execute(f"INSERT INTO Game (GameId ,TeamId1, TeamId2, Score1, Score2, Date) VALUES ({game_id},{team1_id},{team2_id},{score1},{score2},'{date}')")
+        cursor.execute(f"INSERT INTO Game (GameId, TeamId1, TeamId2, Score1, Score2, Date) VALUES ({game_id},{team1_id},{team2_id},{score1},{score2},'{date}');")
         mydb.commit()
 
 def add_player(player_id,team_id, name, position):
-        cursor.execute(f"INSERT INTO Player (PlayerID ,TeamId, Name, Position) VALUES ({player_id},{team_id},'{name}', '{position}')")
+        cursor.execute(f"INSERT INTO Player (PlayerID ,TeamId, Name, Position) VALUES ({player_id},{team_id},'{name}', '{position}');")
         mydb.commit()
 
 def view_players_on_team(team_id):
-        cursor.execute(f"SELECT Nickname, PlayerId, Name, Position FROM Team,Player WHERE Player.TeamId = {team_id} AND Team.TeamID= {team_id}")
+        cursor.execute(f"SELECT Nickname, PlayerId, Name, Position FROM Team,Player WHERE Player.TeamId = {team_id} AND Team.TeamID= {team_id};")
         return cursor.fetchall()
 
 def view_players_by_position(position):
-        cursor.execute(f"SELECT * FROM Player WHERE Position = '{position}'")
+        cursor.execute(f"SELECT * FROM Player WHERE Position = '{position};'")
         return cursor.fetchall()
 
 def view_teams_by_conference(conference):
-        cursor.execute(f"SELECT * FROM Team WHERE Conference='{conference}' ORDER BY Nickname ASC")
+        cursor.execute(f"SELECT * FROM Team WHERE Conference='{conference}' ORDER BY Nickname ASC;")
         return cursor.fetchall()
 
 def view_games_by_team(team_id): 
-        cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id}")
+        cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id};")
         return cursor.fetchall()
 
 def view_results_by_date(date):
-        cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t2.Nickname,' Won')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.date= '{date}' ")
+        cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t2.Nickname,' Won')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.date= '{date}';")
         return cursor.fetchall()
 
 def bonus(team_id):
-  cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, p1.Name, p1.Position, g.Score1, t2.Location, t2.Nickname,p2.Name, p2.position, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 JOIN Player p1 on p1.TeamId= t1.TeamId JOIN Player p2 on p2.TeamId= t2.TeamId WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id} ")
+  cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, p1.Name, p1.Position, g.Score1, t2.Location, t2.Nickname,p2.Name, p2.position, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 JOIN Player p1 on p1.TeamId= t1.TeamId JOIN Player p2 on p2.TeamId= t2.TeamId WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id};")
   return cursor.fetchall()
 
 def executeSelect(query):
     cursor.execute(query)
     res = printFormat(cursor.fetchall())
     return res
+
 def printFormat(result):
     header = []
     for cd in cursor.description:  # get headers
@@ -136,3 +137,7 @@ def printFormat(result):
     print('Query Result:')
     print('')
     return(tabulate(result, headers=header))
+
+def close_db():
+    cursor.close()
+    mydb.close()
