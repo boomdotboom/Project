@@ -26,7 +26,7 @@
                 <label for="position">Position:</label>
                 <input type="text" id="position" name="position" required>
             </div>
-            <input name="submit" type="submit" >
+            <button name="submit" type="submit" >
         </form>    
     </div>
 

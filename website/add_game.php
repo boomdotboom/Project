@@ -39,7 +39,7 @@
                 <input type="text" id="score2" name="score2" required>
             </div>
             
-            <input name="submit" type="submit" >
+            <button name="submit" type="submit" >
         </form>
     </div>
 
@@ -48,7 +48,7 @@
 
     <script>
         function validateForm() {
-            var form = document.getElementById("addPlayerForm");
+            var form = document.getElementById("addGameForm");
             var inputs = form.getElementsByTagName("input");
             for (var i = 0; i < inputs.length; i++) {
                 if (inputs[i].value.trim() === "") {

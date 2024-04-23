@@ -21,6 +21,20 @@
         </form>
     </div>
     <a href="home.html">Home</a>
+
+    <script>
+        function validateForm() {
+            var form = document.getElementById("findTeamsbyConfrenceForm");
+            var inputs = form.getElementsByTagName("input");
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].value.trim() === "") {
+                    alert("Please fill out all the fields.");
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
 
