@@ -97,6 +97,7 @@ def create_tables():
                        (4,31,'Kyle Allen','Quarterback'),(22,31,'Najee Harris','Running back'),(33,31,'Nathan Meadors','Safety'),
                        (8,32,'Will Levis','Quarterback'),(36,32,'Julius Chestnut','Running back'),(44,32,'Mike Brown','Safety')
                        ''')
+        mydb.commit()
 def add_game(game_id, team1_id, team2_id, score1, score2, date):
         cursor.execute(f"INSERT INTO Game (GameId ,TeamId1, TeamId2, Score1, Score2, Date) VALUES ({game_id},{team1_id},{team2_id},{score1},{score2},'{date}')")
         mydb.commit()
@@ -117,11 +118,11 @@ def view_teams_by_conference(conference):
         cursor.execute(f"SELECT * FROM Team WHERE Conference='{conference}' ORDER BY Nickname ASC")
         return cursor.fetchall()
 
-def view_games_by_team(team_id): # The Problem CHILDREN
+def view_games_by_team(team_id): 
         cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id}")
         return cursor.fetchall()
 
-def view_results_by_date(date):# The Problem CHILDREN
+def view_results_by_date(date):
         cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t2.Nickname,' Won')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.date= '{date}' ")
         return cursor.fetchall()
 

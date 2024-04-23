@@ -13,7 +13,7 @@ Sports.add_game(game_id,team1_id,team2_id,score1,score2,date)
 res=Sports.executeSelect('Select * From Game')
 res = res.split('\n')  # split the header and data for printing
 print("<br/>" + "<br/>")
-print("<br/>" + "Table ITEM after:"+"<br/>" +
+print("<br/>" + "Table Game after:"+"<br/>" +
           res[0] + "<br/>"+res[1] + "<br/>")
 for i in range(len(res)-2):
     print(res[i+2]+"<br/>")
