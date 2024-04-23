@@ -21,10 +21,6 @@
                 <input type="date" id="date" name="date" required>
             </div>
             <div class="form-group">
-                <label for="location">Location:</label>
-                <input type="text" id="location" name="location" required>
-            </div>
-            <div class="form-group">
                 <label for="team1">Team 1 ID:</label>
                 <input type="text" id="team1" name="team1" required>
             </div>
