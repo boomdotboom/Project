@@ -37,8 +37,9 @@ def create_tables():
         cursor.execute('''CREATE TABLE Player (
                                     PlayerId INTEGER,
                                     TeamId INTEGER,
-                                    Name TEXT Primary Key,
+                                    Name TEXT,
                                     Position TEXT,
+                                    CONSTRAINT  PK_Player PRIMARY KEY(PlayerId, TeamId),
                                     FOREIGN KEY (TeamId) REFERENCES Team(TeamId)
                                 )''')
         cursor.execute('''INSERT INTO Team (TeamID,Location, Nickname, Conference, Division) VALUES 
@@ -112,7 +113,7 @@ def view_teams_by_conference(conference):
         return cursor.fetchall()
 
 def view_games_by_team(team_id): # The Problem CHILDREN
-        cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t2.Nickname,' Won')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id}")
+        cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id}")
         return cursor.fetchall()
 
 def view_results_by_date(date):# The Problem CHILDREN
@@ -131,20 +132,23 @@ add_game(1, 2, 29, 21, 17,'2024-04-15')
 
     # Add a player
 add_player(1,29,'Tom Brady','Quarterback')
-
     # View players on a team
-print(view_players_on_team(29))
 
+print(view_players_on_team(29))
+print()
     # View players by position
 print(view_players_by_position('Quarterback'))
-
+print()
     # View teams by conference
 print(view_teams_by_conference('AFC'))
-
+print()
     # View games by team
 print(view_games_by_team(2))
-
+print()
     # View results by date
 print(view_results_by_date('2024-04-15'))
+print()
 
-print(bonus(2))
+
+
+#print(bonus(2))
