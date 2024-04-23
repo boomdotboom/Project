@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/substyles.css">
-    <title>Add a Player</title>
+    <title>Add a Game</title>
 </head>
 <body>
 <h3>Enter Game into the Database:</h3>
@@ -15,7 +15,7 @@
     TeamID2: <input type="text" name="team_id2"><br>
     Score1: <input type="text" name="score_1"><br>
     Score2: <input type="text" name="score_2"><br>
-    Date: <input type="text" name="date"><br>
+    Date: <input type="date" name="date"><br>
     <input name="submit" type="submit" >
 </form>
 <br><br>

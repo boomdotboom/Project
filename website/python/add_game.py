@@ -1,6 +1,8 @@
-import mysql.connector
-import sys
 import Sports
+import sys
+import traceback
+import logging
+
 Sports.open_database()
 
 game_id = sys.args[1]
@@ -9,7 +11,9 @@ team2_id = sys.args[3]
 score1= sys.args[4]
 score2 = sys.args[5]
 date= sys.args[6]
+
 Sports.add_game(game_id,team1_id,team2_id,score1,score2,date)
+
 res=Sports.executeSelect('Select * From Game')
 res = res.split('\n')  # split the header and data for printing
 print("<br/>" + "<br/>")
