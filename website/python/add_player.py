@@ -9,11 +9,11 @@ def add_player(playerId,teamId,name,position):
         
         values = "'"+ str(playerId) + "','" + str(teamId) + "," + name + "','" +  position +  "'"
 
-        Sports.insert("Team", values)
-        res = Sports.executeSelect('SELECT * FROM Team;')
+        Sports.insert("Player", values)
+        res = Sports.executeSelect('SELECT * FROM Player;')
         res = res.split('\n') 
         print("<br/>" + "<br/>")
-        print("<br/>" + "Table Team after:"+"<br/>" + res[0] + "<br/>"+res[1] + "<br/>")
+        print("<br/>" + "Table Player after:"+"<br/>" + res[0] + "<br/>"+res[1] + "<br/>")
         for i in range(len(res)-2):
             print(res[i+2]+"<br/>")
             
