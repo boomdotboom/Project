@@ -32,7 +32,7 @@ if (isset($_POST['submit']))
     $data = escapeshellarg($_POST['date']); #data
 
     // build the linux command that you want executed;  
-    $command = 'python3 Sports.py ' . $data;
+    $command = 'python3 view_results_by_date.py ' . $data;
 
     // remove dangerous characters from command to protect web server
     $command = escapeshellcmd($command);

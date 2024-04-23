@@ -7,48 +7,35 @@
     <title>Add a Player</title>
 </head>
 <body>
-    <div class="options-box">
-        <h1>Add a Player</h1>
-        <form action="add_player.php" method="post">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required><br><br>
-            </div>
-            <div class="form-group">
-                <label for="position">Positon:</label>
-                <input type="text" id="position" name="position" required><br><br>
-            </div>
-            <div class="form-group">
-                <label for="playerID">Player ID:</label>
-                <input type="text" id="playerID" name="playerID" required><br><br>
-            </div>
-            <div class="form-group">
-                <label for="teamID">Team ID:</label>
-                <input type="text" id="teamID" name="teamID" required><br><br>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+<h3>Enter Player into Database:</h3>
+
+<form action="add_player.php" method="post">
+    Name: <input type="text" name="name"><br>
+    Position: <input type="text" name="position"><br>
+    PlayerID: <input type="text" name="playerID"><br>
+    TeamID: <input type="text" name="teamID"><br>
+</form>
+<br><br>
     <a href="home.html">Home</a>
 </body>
 </html>
 
-
 <?php
-if (isset($_POST['submit'])) 
+if (isset($_POST['submit']))
 {
-    // add ' ' around multiple strings so they are treated as single command line args
-    $data = escapeshellarg($_POST['name''psotion''playerID''teamID']); #data
+    // replace ' ' with '\ ' in the strings so they are treated as single command line args
+    $name = escapeshellarg($_POST['name'])
+    $position = escapeshellarg($_POST['position']);
+    $playerID = escapeshellarg($_POST['playerID']);
+    $teamID = escapeshellarg($_POST['teamID']);
 
-    // build the linux command that you want executed;  
-    $command = 'python3 Sports.py ' . $data;
+    $command = 'python3 add_game.py ' . $name . ' ' . $position . ' ' . $playerID. ' ' . $teamID;
 
     // remove dangerous characters from command to protect web server
-    $command = escapeshellcmd($command);
- 
-    // echo then run the command
-    echo "command: $command <br>";
-    system($command);           
+    $escaped_command = escapeshellcmd($command);
+    echo "<p>command: $command <p>";
+    // run insert_new_item.py
+    system($escaped_command);          
 }
 ?>
 
