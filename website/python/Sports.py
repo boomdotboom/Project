@@ -1,14 +1,17 @@
 import mysql.connector
 import sys
+from tabulate import tabulate
 
-
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="aemorton",
-  password="eT5wisee",
-  database= "aemorton"
-) 
-cursor = mydb.cursor()
+def open_database():
+    global mydb
+    mydb = mysql.connector.connect(
+    host="localhost",
+    user="aemorton",
+    password="eT5wisee",
+    database= "aemorton"
+    ) 
+    global cursor
+    cursor = mydb.cursor()
 
 #par1 = sys.args[1]
 #par2 = sys.args[2]
@@ -96,9 +99,11 @@ def create_tables():
                        ''')
 def add_game(game_id, team1_id, team2_id, score1, score2, date):
         cursor.execute(f"INSERT INTO Game (GameId ,TeamId1, TeamId2, Score1, Score2, Date) VALUES ({game_id},{team1_id},{team2_id},{score1},{score2},'{date}')")
+        mydb.commit()
 
 def add_player(player_id,team_id, name, position):
         cursor.execute(f"INSERT INTO Player (PlayerID ,TeamId, Name, Position) VALUES ({player_id},{team_id},'{name}', '{position}')")
+        mydb.commit()
 
 def view_players_on_team(team_id):
         cursor.execute(f"SELECT Nickname, PlayerId, Name, Position FROM Team,Player WHERE Player.TeamId = {team_id} AND Team.TeamID= {team_id}")
@@ -120,35 +125,19 @@ def view_results_by_date(date):# The Problem CHILDREN
         cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t2.Nickname,' Won')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.date= '{date}' ")
         return cursor.fetchall()
 
-def __del__():
-        cursor.close()
 def bonus(team_id):
   cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, p1.Name, p1.Position, g.Score1, t2.Location, t2.Nickname,p2.Name, p2.position, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 JOIN Player p1 on p1.TeamId= t1.TeamId JOIN Player p2 on p2.TeamId= t2.TeamId WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id} ")
   return cursor.fetchall()
 
-    # Add a game
-create_tables()
-add_game(1, 2, 29, 21, 17,'2024-04-15')
-
-    # Add a player
-add_player(1,29,'Tom Brady','Quarterback')
-    # View players on a team
-
-print(view_players_on_team(29))
-print()
-    # View players by position
-print(view_players_by_position('Quarterback'))
-print()
-    # View teams by conference
-print(view_teams_by_conference('AFC'))
-print()
-    # View games by team
-print(view_games_by_team(2))
-print()
-    # View results by date
-print(view_results_by_date('2024-04-15'))
-print()
-
-
-
-#print(bonus(2))
+def executeSelect(query):
+    cursor.execute(query)
+    res = printFormat(cursor.fetchall())
+    return res
+def printFormat(result):
+    header = []
+    for cd in cursor.description:  # get headers
+        header.append(cd[0])
+    print('')
+    print('Query Result:')
+    print('')
+    return(tabulate(result, headers=header))
