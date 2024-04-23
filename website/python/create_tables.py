@@ -28,10 +28,11 @@ def create_tables():
                                     FOREIGN KEY (TeamId2) REFERENCES Team(TeamId)
                                 )''')
         cursor.execute('''CREATE TABLE Player (
-                                    PlayerId INTEGER ,
+                                    PlayerId INTEGER,
                                     TeamId INTEGER,
-                                    Name TEXT PRIMARY KEY,
+                                    Name TEXT,
                                     Position TEXT,
+                                    CONSTRAINT  PK_Player PRIMARY KEY(PlayerId, TeamId),
                                     FOREIGN KEY (TeamId) REFERENCES Team(TeamId)
                                 )''')
         cursor.execute('''INSERT INTO Team (TeamID,Location, Nickname, Conference, Division) VALUES 
