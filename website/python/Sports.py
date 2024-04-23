@@ -124,6 +124,12 @@ def bonus(team_id):
   cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, p1.Name, p1.Position, g.Score1, t2.Location, t2.Nickname,p2.Name, p2.position, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 JOIN Player p1 on p1.TeamId= t1.TeamId JOIN Player p2 on p2.TeamId= t2.TeamId WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id};")
   return cursor.fetchall()
 
+def nextId(table):
+    query = "select IFNULL(max(ID), 0) as max_id from " + table
+    cursor.execute(query)
+    result = cursor.fetchall()[0][0]
+    return 1 if result is None else int(result) + 1
+
 def executeSelect(query):
     cursor.execute(query)
     res = printFormat(cursor.fetchall())
