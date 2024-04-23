@@ -29,7 +29,7 @@ if (isset($_POST['submit']))
     $playerID = escapeshellarg($_POST['playerID']);
     $teamID = escapeshellarg($_POST['teamID']);
 
-    $command = 'python3 add_game.py ' . $name . ' ' . $position . ' ' . $playerID. ' ' . $teamID;
+    $command = 'python3 add_player.py ' . $name . ' ' . $position . ' ' . $playerID. ' ' . $teamID;
 
     // remove dangerous characters from command to protect web server
     $escaped_command = escapeshellcmd($command);
