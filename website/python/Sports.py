@@ -144,6 +144,11 @@ def printFormat(result):
     print('')
     return(tabulate(result, headers=header))
 
+def insert(table, values):
+    query = "INSERT into " + table + " values (" + values + ")" + ';'
+    cursor.execute(query)
+    mydb.commit()
+
 def close_db():
     cursor.close()
     mydb.close()
