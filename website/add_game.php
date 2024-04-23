@@ -3,6 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Game</title>
+    <link rel="stylesheet" type="text/css" href="../style/add_game.css"> 
+    <link rel="stylesheet" type="text/css" href="../style/carousel.css"> 
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/substyles.css">
 </head>
@@ -68,13 +70,12 @@ if (isset($_POST['submit']))
     // replace ' ' with '\ ' in the strings so they are treated as single command line args
     $gameID = escapeshellarg($_POST['gameID']);
     $date = escapeshellarg($_POST['date']);
-    $location = escapeshellarg($_POST['location']);
     $team1 = escapeshellarg($_POST['team1']);
     $score1 = escapeshellarg($_POST['score1']);
     $team2 = escapeshellarg($_POST['team2']);
     $score2 = escapeshellarg($_POST['score2']);
 
-    $command = 'python3 add_game.py ' . $gameID . ' ' . $date . ' ' . $location. ' ' . $team1 . ' ' . $score1. ' '  . $team2. ' '  . $score2;
+    $command = 'python3 add_game.py ' . $gameID . ' ' . $date . ' ' . $team1 . ' ' . $score1. ' '  . $team2. ' '  . $score2;
 
     // remove dangerous characters from command to protect web server
     $escaped_command = escapeshellcmd($command);

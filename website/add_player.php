@@ -15,8 +15,8 @@
                 <input type="text" id="playerID" name="playerID" required>
             </div>
             <div class="form-group">
-                <label for="teamName">Team Name:</label>
-                <input type="text" id="teamName" name="teamName" required>
+                <label for="teamId">Team ID:</label>
+                <input type="text" id="teamId" name="teamId" required>
             </div>
             <div class="form-group">
                 <label for="playerName">Player Name:</label>
@@ -51,15 +51,15 @@
 
 <?php
 // Checking if the form has been submitted
-if (isset($_POST['playerID']) && isset($_POST['teamName']) && isset($_POST['playerName']) && isset($_POST['position'])) 
+if (isset($_POST['playerID']) && isset($_POST['teamId']) && isset($_POST['playerName']) && isset($_POST['position'])) 
 {
     // replace ' ' with '\ ' in the strings so they are treated as single command line args
     $playerID = escapeshellarg($_POST['playerID']);
-    $teamName = escapeshellarg($_POST['teamName']);
+    $teamId = escapeshellarg($_POST['teamId']);
     $playerName = escapeshellarg($_POST['playerName']);
     $position = escapeshellarg($_POST['position']);
 
-    $command = 'python3 add_game.py ' . $playerID . ' ' . $teamName . ' ' . $playerName. ' ' . $position;
+    $command = 'python3 add_game.py ' . $playerID . ' ' . $teamId . ' ' . $playerName. ' ' . $position;
 
     // remove dangerous characters from command to protect web server
     $escaped_command = escapeshellcmd($command);
