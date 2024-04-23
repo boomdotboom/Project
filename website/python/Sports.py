@@ -5,9 +5,9 @@ def open_database():
     global mydb
     mydb = mysql.connector.connect(
     host="localhost",
-    user="cps019",
-    password="CollegeIs#1$",
-    database= "cps019"
+    user="aemorton",
+    password="eT5wisee",
+    database= "aemorton"
     ) 
     global cursor
     cursor = mydb.cursor()
