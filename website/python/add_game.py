@@ -1,19 +1,19 @@
 import mysql.connector
 import sys
+import Sports
+Sports.open_database()
 
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="aemorton",
-  password="eT5wisee",
-  database= "aemorton"
-)
-cursor = mydb.cursor()
 game_id = sys.args[1]
 team1_id = sys.args[2]
 team2_id = sys.args[3]
 score1= sys.args[4]
 score2 = sys.args[5]
 date= sys.args[6]
-def add_game(game_id, team1_id, team2_id, score1, score2, date):
-        cursor.execute(f"INSERT INTO Game (GameId ,TeamId1, TeamId2, Score1, Score2, Date) VALUES ({game_id},{team1_id},{team2_id},{score1},{score2},'{date}')")
-add_game(game_id,team1_id,team2_id,score1,score2,date)
+Sports.add_game(game_id,team1_id,team2_id,score1,score2,date)
+res=Sports.executeSelect('Select * From Game')
+res = res.split('\n')  # split the header and data for printing
+print("<br/>" + "<br/>")
+print("<br/>" + "Table ITEM after:"+"<br/>" +
+          res[0] + "<br/>"+res[1] + "<br/>")
+for i in range(len(res)-2):
+    print(res[i+2]+"<br/>")
