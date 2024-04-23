@@ -1,4 +1,3 @@
-import mysql.connector
 import sys
 import Sports
 Sports.open_database()

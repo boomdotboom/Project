@@ -1,5 +1,4 @@
 import mysql.connector
-import sys
 from tabulate import tabulate
 
 def open_database():
@@ -13,11 +12,6 @@ def open_database():
     global cursor
     cursor = mydb.cursor()
 
-#par1 = sys.args[1]
-#par2 = sys.args[2]
-#par3 = sys.args[3]
-#par4 = sys.args[4]
-#par5 = sys.args[5]
 
 def create_tables():
         cursor.execute('''CREATE TABLE Team (
