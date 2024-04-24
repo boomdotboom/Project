@@ -1,7 +1,7 @@
 import sys
 import Sports
 
-position = sys.args[1]
+position = sys.argv[1]
 Sports.view_players_by_position(position)
 # res = res.split('\n')  # split the header and data for printing
 # print("<br/>" + "<br/>")

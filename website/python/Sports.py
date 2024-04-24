@@ -39,6 +39,7 @@ def create_tables():
                                     CONSTRAINT  PK_Player PRIMARY KEY(PlayerId, TeamId),
                                     FOREIGN KEY (TeamId) REFERENCES Team(TeamId)
                                 );''')
+        mydb.commit()
 def insert_data():
         cursor.execute('''INSERT INTO Team (TeamID,Location, Nickname, Conference, Division) VALUES 
                        (1, 'Arizona', 'Cardinals', 'NFC', 'West'),

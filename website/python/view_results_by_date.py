@@ -2,7 +2,7 @@ import sys
 import Sports
 
 
-date = sys.args[1]
+date = sys.argv[1]
 Sports.view_results_by_date()
 # res = res.split('\n')  # split the header and data for printing
 # print("<br/>" + "<br/>")

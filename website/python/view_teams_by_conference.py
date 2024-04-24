@@ -1,7 +1,7 @@
 import sys
 import Sports
 
-conference = sys.args[1]
+conference = sys.argv[1]
 Sports.view_teams_by_conference(conference)
 # print("<br/>" + "<br/>")
 # print("<br/>" + "Table Game after:"+"<br/>" +

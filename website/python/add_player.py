@@ -30,4 +30,4 @@ name = sys.argv[3]
 position = sys.argv[4]
 
 # Add the game
-Sports.add_player(playerId=playerId, teamId=teamId, name=name, position=position)
+Sports.add_player(playerId, teamId, name, position)

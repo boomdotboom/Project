@@ -4,7 +4,7 @@ import Sports
 
 Sports.open_database()
 
-team_id = sys.args[1]
+team_id = sys.argv[1]
 Sports.view_games_by_team(team_id)
 # res = res.split('\n')  # split the header and data for printing
 # print("<br/>" + "<br/>")
