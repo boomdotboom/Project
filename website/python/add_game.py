@@ -4,7 +4,7 @@ import logging
 import Sports
 
 try:
-    Sports.open_database()  # open database
+    Sports.open_database('localhost','aemorton','eT5wisee','aemorton') # open database
     gameID = sys.argv[1]
     date = sys.argv[2]
     team1 = sys.argv[3]
@@ -32,4 +32,4 @@ except Exception as e:
 
 # Parse command line arguments
 
-#Sports.add_game(gameID,date,team1,score1,team2,score2)
+Sports.add_game(gameID,date,team1,score1,team2,score2)
