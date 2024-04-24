@@ -28,7 +28,7 @@ if (isset($_POST['submit']))
     $command = escapeshellcmd($command);
  
     // echo then run the command
-    echo "command: $command <br>";
+    echo "<p>command: $command <p>";
     system($command);           
 }
 ?>

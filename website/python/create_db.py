@@ -1,9 +1,13 @@
-import sys
-import traceback
-import logging
 import Sports
 
-Sports.open_database('localhost','aemorton','eT5wisee','aemorton')
 Sports.create_tables()
-Sports.insert_data()
+res= Sports.executeSelect("Show Tables;")
+res = res.split('\n')  # split the header and data for printing
+print("<br/>" + "<br/>")
+print("<br/>" + "Table Player after:"+"<br/>" +
+    res[0] + "<br/>"+res[1] + "<br/>")
+for i in range(len(res)-2):
+    print(res[i+2]+"<br/>")
+html_content = '''        '''
+print(html_content)
 Sports.close_db()
