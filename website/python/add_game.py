@@ -35,4 +35,5 @@ team2 = sys.argv[5]
 score2 = sys.argv[6]
 
 # Add the game
-add_game(gameID, date, team1, score1, team2, score2)
+#add_game(gameID, date, team1, score1, team2, score2)
+Sports.add_game(gameID,date,team1,score1,team2,score2)

@@ -59,7 +59,7 @@
 </html>
 
 <?php
-if (isset($_POST['submit'])) 
+if (isset($_POST['gameID'])&& isset($_POST['date'])&& isset($_POST['team1'])&&isset($_POST['score1'])&&isset($_POST['team2'])&&isset($_POST['score2'])) 
 {
     // replace ' ' with '\ ' in the strings so they are treated as single command line args
     $gameID = escapeshellarg($_POST['gameID']);
