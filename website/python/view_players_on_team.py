@@ -1,17 +1,17 @@
 import sys
 import traceback
 import logging
-import python_db
+import Sports
 
 mysql_username = 'aemorton'
 mysql_password = 'eT5wisee'
 
 try:
-    python_db.open_database('localhost', mysql_username, mysql_password, mysql_username)  # open database
+    Sports.open_database('localhost', mysql_username, mysql_password, mysql_username)  # open database
     team = sys.argv[1]
     query = f"SELECT Nickname, Name FROM Team t NATURAL JOIN Player p WHERE t.Nickname = '{team}';"
     
-    res = python_db.executeSelect(query)
+    res = Sports.executeSelect(query)
     rows = [tuple(row.split(' ', 1)) for row in res.split('\n')[2:] if row.strip()]  # Split each row by the first space and remove header and empty rows
     
     html_content = f'''
@@ -41,7 +41,7 @@ try:
     '''
     
     print(html_content)
-    python_db.close_db()  # close db
+    Sports.close_db()  # close db
 except Exception as e:
     print("Error in add_game.py")
     logging.error(traceback.format_exc())

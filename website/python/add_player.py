@@ -3,29 +3,45 @@ import traceback
 import logging
 import Sports
 
-try:
-    Sports.open_database()  # open database
-    playerId = sys.argv[1]
-    teamId = sys.argv[2]
-    name = sys.argv[3]
-    position = sys.argv[4]
-    values = "'"+ str(playerId) + "','" + str(teamId) + "," + name + "','" +  position +  "'"
+mysql_username = 'aemorton'
+mysql_password = 'eT5wisee'
 
-    Sports.insert("Player", values)
-    res = Sports.executeSelect('SELECT * FROM Player;')
-    res = res.split('\n') 
-    print("<br/>" + "<br/>")
-    print("<br/>" + "Table Player after:"+"<br/>" + res[0] + "<br/>"+res[1] + "<br/>")
-    for i in range(len(res)-2):
-        print(res[i+2]+"<br/>")
-        
-    html_content = '''        '''
+try:
+    Sports.open_database('localhost', mysql_username, mysql_password, mysql_username)  # open database
+    team = sys.argv[1]
+    query = f"SELECT Nickname, Name FROM Team t NATURAL JOIN Player p WHERE t.Nickname = '{team}';"
+    
+    res = Sports.executeSelect(query)
+    rows = [tuple(row.split(' ', 1)) for row in res.split('\n')[2:] if row.strip()]  # Split each row by the first space and remove header and empty rows
+    
+    html_content = f'''
+    <!DOCTYPE html>
+    <html>
+    <style>
+    table, th, td {{
+        border:1px solid black;
+        border-collapse: collapse;
+        padding: 8px;
+    }}
+    </style>
+    <body>
+
+    <h2>Team Players</h2>
+
+    <table style="width:100%">
+    <tr>
+        <th>Team Name</th>
+        <th>Player Name</th>
+    </tr>
+    {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td></tr>' for row in rows])}
+    </table>
+
+    </body>
+    </html>
+    '''
+    
+    print(html_content)
     Sports.close_db()  # close db
 except Exception as e:
-    print("Error in add_player.py")
+    print("Error in add_game.py")
     logging.error(traceback.format_exc())
-
-# Parse command line arguments
-
-# Add the game
-#Sports.add_player(playerId, teamId, name, position)

@@ -2,9 +2,10 @@ import sys
 import traceback
 import logging
 import Sports
-
+mysql_username = 'aemorton'  # please change to your username
+mysql_password = 'eT5wisee'  # please change to your MySQL password
 try:
-    Sports.open_database('localhost','aemorton','eT5wisee','aemorton') # open database
+    Sports.open_database('localhost',mysql_username,mysql_password,mysql_username) # open database
     
     gameID = sys.argv[1]
     date = sys.argv[2]

@@ -93,98 +93,98 @@ def create_tables():
                        (8,32,'Will Levis','Quarterback'),(36,32,'Julius Chestnut','Running back'),(44,32,'Mike Brown','Safety');
                        ''')
         mydb.commit()
-def add_game(game_id, date, team1_id, score1,team2_id, score2):
-        open_database('localhost','aemorton','eT5wisee','aemorton')
-        cursor.execute(f"INSERT INTO Game (GameId,Date, TeamId1,Score1, TeamId2, Score2) VALUES ({game_id},'{date}',{team1_id},{score1},{team2_id},{score2});")
-        mydb.commit()
-        res = executeSelect('SELECT * FROM Game')
-        res = res.split('\n')  # split the header and data for printing
-        print("<br/>" + "<br/>")
-        print("<br/>" + "Table Player after:"+"<br/>" +
-                res[0] + "<br/>"+res[1] + "<br/>")
-        for i in range(len(res)-2):
-                print(res[i+2]+"<br/>")
-        close_db()      
+# def add_game(game_id, date, team1_id, score1,team2_id, score2):
+#         open_database('localhost','aemorton','eT5wisee','aemorton')
+#         cursor.execute(f"INSERT INTO Game (GameId,Date, TeamId1,Score1, TeamId2, Score2) VALUES ({game_id},'{date}',{team1_id},{score1},{team2_id},{score2});")
+#         mydb.commit()
+#         res = executeSelect('SELECT * FROM Game')
+#         res = res.split('\n')  # split the header and data for printing
+#         print("<br/>" + "<br/>")
+#         print("<br/>" + "Table Player after:"+"<br/>" +
+#                 res[0] + "<br/>"+res[1] + "<br/>")
+#         for i in range(len(res)-2):
+#                 print(res[i+2]+"<br/>")
+#         close_db()      
 
-def add_player(player_id,team_id, name, position):
-        open_database('localhost','aemorton','eT5wisee','aemorton')
-        cursor.execute(f"INSERT INTO Player (PlayerID ,TeamId, Name, Position) VALUES ({player_id},{team_id},'{name}', '{position}');")
-        mydb.commit()
-        res=executeSelect('SELECT * FROM Player')
-        res = res.split('\n')  # split the header and data for printing
-        print("<br/>" + "<br/>")
-        print("<br/>" + "Table Player after:"+"<br/>" +
-                res[0] + "<br/>"+res[1] + "<br/>")
-        for i in range(len(res)-2):
-                print(res[i+2]+"<br/>")
-        close_db()
+# def add_player(player_id,team_id, name, position):
+#         open_database('localhost','aemorton','eT5wisee','aemorton')
+#         cursor.execute(f"INSERT INTO Player (PlayerID ,TeamId, Name, Position) VALUES ({player_id},{team_id},'{name}', '{position}');")
+#         mydb.commit()
+#         res=executeSelect('SELECT * FROM Player')
+#         res = res.split('\n')  # split the header and data for printing
+#         print("<br/>" + "<br/>")
+#         print("<br/>" + "Table Player after:"+"<br/>" +
+#                 res[0] + "<br/>"+res[1] + "<br/>")
+#         for i in range(len(res)-2):
+#                 print(res[i+2]+"<br/>")
+#         close_db()
 
-def view_players_on_team(team_id):
-        open_database('localhost','aemorton','eT5wisee','aemorton')
-        res= executeSelect(f"SELECT Nickname, PlayerId, Name, Position FROM Team,Player WHERE Player.TeamId = {team_id} AND Team.TeamID= {team_id};")
-        res = res.split('\n')  # split the header and data for printing
-        print("<br/>" + "<br/>")
-        print("<br/>" + "Table Player after:"+"<br/>" +
-                res[0] + "<br/>"+res[1] + "<br/>")
-        for i in range(len(res)-2):
-                print(res[i+2]+"<br/>")
-        close_db()
+# def view_players_on_team(team_id):
+#         open_database('localhost','aemorton','eT5wisee','aemorton')
+#         res= executeSelect(f"SELECT Nickname, PlayerId, Name, Position FROM Team,Player WHERE Player.TeamId = {team_id} AND Team.TeamID= {team_id};")
+#         res = res.split('\n')  # split the header and data for printing
+#         print("<br/>" + "<br/>")
+#         print("<br/>" + "Table Player after:"+"<br/>" +
+#                 res[0] + "<br/>"+res[1] + "<br/>")
+#         for i in range(len(res)-2):
+#                 print(res[i+2]+"<br/>")
+#         close_db()
 
-def view_players_by_position(position):
-        open_database('localhost','aemorton','eT5wisee','aemorton')
-        res=executeSelect(f"SELECT * FROM Player WHERE Position = '{position};'")
-        res = res.split('\n')  # split the header and data for printing
-        print("<br/>" + "<br/>")
-        print("<br/>" + "Table Player after:"+"<br/>" +
-                res[0] + "<br/>"+res[1] + "<br/>")
-        for i in range(len(res)-2):
-                print(res[i+2]+"<br/>")
-        close_db()
+# def view_players_by_position(position):
+#         open_database('localhost','aemorton','eT5wisee','aemorton')
+#         res=executeSelect(f"SELECT * FROM Player WHERE Position = '{position};'")
+#         res = res.split('\n')  # split the header and data for printing
+#         print("<br/>" + "<br/>")
+#         print("<br/>" + "Table Player after:"+"<br/>" +
+#                 res[0] + "<br/>"+res[1] + "<br/>")
+#         for i in range(len(res)-2):
+#                 print(res[i+2]+"<br/>")
+#         close_db()
 
-def view_teams_by_conference(conference):
-        open_database('localhost','aemorton','eT5wisee','aemorton')
-        res=executeSelect(f"SELECT * FROM Team WHERE Conference='{conference}' ORDER BY Nickname ASC;")
-        res = res.split('\n')  # split the header and data for printing
-        print("<br/>" + "<br/>")
-        print("<br/>" + "Table Player after:"+"<br/>" +
-                res[0] + "<br/>"+res[1] + "<br/>")
-        for i in range(len(res)-2):
-                print(res[i+2]+"<br/>")
-        close_db()
+# def view_teams_by_conference(conference):
+#         open_database('localhost','aemorton','eT5wisee','aemorton')
+#         res=executeSelect(f"SELECT * FROM Team WHERE Conference='{conference}' ORDER BY Nickname ASC;")
+#         res = res.split('\n')  # split the header and data for printing
+#         print("<br/>" + "<br/>")
+#         print("<br/>" + "Table Player after:"+"<br/>" +
+#                 res[0] + "<br/>"+res[1] + "<br/>")
+#         for i in range(len(res)-2):
+#                 print(res[i+2]+"<br/>")
+#         close_db()
         
 
-def view_games_by_team(team_id): 
-        open_database('localhost','aemorton','eT5wisee','aemorton')
-        res=executeSelect(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id};")
-        res = res.split('\n')  # split the header and data for printing
-        print("<br/>" + "<br/>")
-        print("<br/>" + "Table Player after:"+"<br/>" +
-                res[0] + "<br/>"+res[1] + "<br/>")
-        for i in range(len(res)-2):
-                print(res[i+2]+"<br/>")
-        close_db()
+# def view_games_by_team(team_id): 
+#         open_database('localhost','aemorton','eT5wisee','aemorton')
+#         res=executeSelect(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id};")
+#         res = res.split('\n')  # split the header and data for printing
+#         print("<br/>" + "<br/>")
+#         print("<br/>" + "Table Player after:"+"<br/>" +
+#                 res[0] + "<br/>"+res[1] + "<br/>")
+#         for i in range(len(res)-2):
+#                 print(res[i+2]+"<br/>")
+#         close_db()
 
-def view_results_by_date(date):
-        open_database('localhost','aemorton','eT5wisee','aemorton')
-        res=executeSelect(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t2.Nickname,' Won')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.date= '{date}';")
-        res = res.split('\n')  # split the header and data for printing
-        print("<br/>" + "<br/>")
-        print("<br/>" + "Table Player after:"+"<br/>" +
-                res[0] + "<br/>"+res[1] + "<br/>")
-        for i in range(len(res)-2):
-                print(res[i+2]+"<br/>")
-        close_db()
+# def view_results_by_date(date):
+#         #open_database('localhost','aemorton','eT5wisee','aemorton')
+#         res=executeSelect(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t2.Nickname,' Won')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.date= '{date}';")
+#         res = res.split('\n')  # split the header and data for printing
+#         print("<br/>" + "<br/>")
+#         print("<br/>" + "Table Player after:"+"<br/>" +
+#                 res[0] + "<br/>"+res[1] + "<br/>")
+#         for i in range(len(res)-2):
+#                 print(res[i+2]+"<br/>")
+#         close_db()
 
-def bonus(team_id):
-        open_database('localhost','aemorton','eT5wisee','aemorton')
-        res=executeSelect(f"SELECT g.Date, t1.Location, t1.Nickname, p1.Name, p1.Position, g.Score1, t2.Location, t2.Nickname,p2.Name, p2.position, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 JOIN Player p1 on p1.TeamId= t1.TeamId JOIN Player p2 on p2.TeamId= t2.TeamId WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id};")
-        res = res.split('\n')  # split the header and data for printing
-        print("<br/>" + "<br/>")
-        print("<br/>" + "Table Player after:"+"<br/>" +
-                res[0] + "<br/>"+res[1] + "<br/>")
-        for i in range(len(res)-2):
-                print(res[i+2]+"<br/>")
-        close_db()
+# def bonus(team_id):
+#         open_database('localhost','aemorton','eT5wisee','aemorton')
+#         res=executeSelect(f"SELECT g.Date, t1.Location, t1.Nickname, p1.Name, p1.Position, g.Score1, t2.Location, t2.Nickname,p2.Name, p2.position, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 JOIN Player p1 on p1.TeamId= t1.TeamId JOIN Player p2 on p2.TeamId= t2.TeamId WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id};")
+#         res = res.split('\n')  # split the header and data for printing
+#         print("<br/>" + "<br/>")
+#         print("<br/>" + "Table Player after:"+"<br/>" +
+#                 res[0] + "<br/>"+res[1] + "<br/>")
+#         for i in range(len(res)-2):
+#                 print(res[i+2]+"<br/>")
+#         close_db()
 
 def nextId(table):
     query = "select IFNULL(max(ID), 0) as max_id from " + table
