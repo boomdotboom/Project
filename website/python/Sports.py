@@ -14,6 +14,7 @@ def open_database(host, user, password, database):
 
 
 def create_tables():
+        open_database('localhost','aemorton','eT5wisee','aemorton')
         cursor.execute('''CREATE TABLE Team (
                                     TeamId INTEGER PRIMARY KEY,
                                     Location TEXT,
@@ -39,8 +40,6 @@ def create_tables():
                                     CONSTRAINT  PK_Player PRIMARY KEY(PlayerId, TeamId),
                                     FOREIGN KEY (TeamId) REFERENCES Team(TeamId)
                                 );''')
-        mydb.commit()
-def insert_data():
         cursor.execute('''INSERT INTO Team (TeamID,Location, Nickname, Conference, Division) VALUES 
                        (1, 'Arizona', 'Cardinals', 'NFC', 'West'),
                        (2, 'Alanta','Falcons','NFC', 'South'), (3, 'Carolina','Panthers','NFC','South'),

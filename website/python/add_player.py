@@ -28,4 +28,4 @@ except Exception as e:
 # Parse command line arguments
 
 # Add the game
-Sports.add_player(playerId, teamId, name, position)
+#Sports.add_player(playerId, teamId, name, position)

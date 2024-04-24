@@ -11,7 +11,7 @@ try:
     score1 = sys.argv[4]
     team2 = sys.argv[5]
     score2 = sys.argv[6]
-    next_id = Sports.nextId("Game", "gameId" )
+    next_id = Sports.nextId("Game" )
     
     values = "'"+ str(next_id) + "','" + str(date)  + "','" +  str(team1) + "','" + str(team2) + "','" + str(score1) + "','" + str(score2) + "','" + str(date) + "'"
 
@@ -32,4 +32,4 @@ except Exception as e:
 
 # Parse command line arguments
 
-Sports.add_game(gameID,date,team1,score1,team2,score2)
+#Sports.add_game(gameID,date,team1,score1,team2,score2)
