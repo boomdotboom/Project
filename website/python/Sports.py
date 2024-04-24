@@ -23,11 +23,11 @@ def create_tables():
                                 );''')
         cursor.execute('''CREATE TABLE Game (
                                     GameId INTEGER PRIMARY KEY,
-                                    TeamId1 INTEGER,
-                                    TeamId2 INTEGER,
-                                    Score1 INTEGER,
-                                    Score2 INTEGER,
                                     Date DATE,
+                                    TeamId1 INTEGER,
+                                    Score1 INTEGER,
+                                    TeamId2 INTEGER,
+                                    Score2 INTEGER,
                                     FOREIGN KEY (TeamId1) REFERENCES Team(TeamId),
                                     FOREIGN KEY (TeamId2) REFERENCES Team(TeamId)
                                 );''')
@@ -39,6 +39,7 @@ def create_tables():
                                     CONSTRAINT  PK_Player PRIMARY KEY(PlayerId, TeamId),
                                     FOREIGN KEY (TeamId) REFERENCES Team(TeamId)
                                 );''')
+def insert_data():
         cursor.execute('''INSERT INTO Team (TeamID,Location, Nickname, Conference, Division) VALUES 
                        (1, 'Arizona', 'Cardinals', 'NFC', 'West'),
                        (2, 'Alanta','Falcons','NFC', 'South'), (3, 'Carolina','Panthers','NFC','South'),
@@ -92,9 +93,12 @@ def create_tables():
                        (8,32,'Will Levis','Quarterback'),(36,32,'Julius Chestnut','Running back'),(44,32,'Mike Brown','Safety');
                        ''')
         mydb.commit()
-def add_game(game_id, team1_id, team2_id, score1, score2, date):
-        cursor.execute(f"INSERT INTO Game (GameId, TeamId1, TeamId2, Score1, Score2, Date) VALUES ({game_id},{team1_id},{team2_id},{score1},{score2},'{date}');")
+def add_game(game_id, date, team1_id, score1,team2_id, score2):
+        open_database()
+        cursor.execute(f"INSERT INTO Game (GameId,Date, TeamId1,Score1, TeamId2, Score2) VALUES ({game_id},'{date}',{team1_id},{score1},{team2_id},{score2});")
         mydb.commit()
+        res = executeSelect('SELECT * FROM Game')
+        print(res)
 
 def add_player(player_id,team_id, name, position):
         cursor.execute(f"INSERT INTO Player (PlayerID ,TeamId, Name, Position) VALUES ({player_id},{team_id},'{name}', '{position}');")

@@ -6,6 +6,7 @@ import Sports
 Sports.open_database()
 
 Sports.create_tables()
+Sports.insert_data()
 
 res=Sports.executeSelect('Select * From Team;')
 res = res.split('\n')  # split the header and data for printing

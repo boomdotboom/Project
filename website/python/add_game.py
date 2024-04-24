@@ -12,7 +12,7 @@ def add_game(gameID, date, team1, score1, team2, score2):
         values = "'"+ gameID + "','" + date  + "','" +  team1 + "','" + team2 + "','" + score1 + "','" + score2 + "','" + date + "'"
 
         Sports.insert("Game", values)
-        res = Sports.executeSelect('SELECT * FROM Game;')
+        res = Sports.executeSelect('SELECT * FROM Game')
         res = res.split('\n') 
         print("<br/>" + "<br/>")
         print("<br/>" + "Table Game after:"+"<br/>" + res[0] + "<br/>"+res[1] + "<br/>")
@@ -34,4 +34,4 @@ team2 = sys.argv[5]
 score2 = sys.argv[6]
 
 # Add the game
-add_game(gameID=gameID, date=date, team1=team1, score1=score1, team2=team2, score2=score2)
+Sports.add_game(gameID, date, team1, score1, team2, score2)
