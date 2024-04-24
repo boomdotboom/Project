@@ -99,34 +99,50 @@ def add_game(game_id, date, team1_id, score1,team2_id, score2):
         mydb.commit()
         res = executeSelect('SELECT * FROM Game')
         print(res)
+        close_db()
 
 def add_player(player_id,team_id, name, position):
+        open_database()
         cursor.execute(f"INSERT INTO Player (PlayerID ,TeamId, Name, Position) VALUES ({player_id},{team_id},'{name}', '{position}');")
         mydb.commit()
+        res=executeSelect('SELECT * FROM Player')
+        print(res)
+        close_db()
 
 def view_players_on_team(team_id):
-        cursor.execute(f"SELECT Nickname, PlayerId, Name, Position FROM Team,Player WHERE Player.TeamId = {team_id} AND Team.TeamID= {team_id};")
-        return cursor.fetchall()
+        open_database()
+        res= executeSelect(f"SELECT Nickname, PlayerId, Name, Position FROM Team,Player WHERE Player.TeamId = {team_id} AND Team.TeamID= {team_id};")
+        print(res)
+        close_db()
 
 def view_players_by_position(position):
-        cursor.execute(f"SELECT * FROM Player WHERE Position = '{position};'")
-        return cursor.fetchall()
+        open_database()
+        res=executeSelect(f"SELECT * FROM Player WHERE Position = '{position};'")
+        print(res)
+        close_db()
 
 def view_teams_by_conference(conference):
-        cursor.execute(f"SELECT * FROM Team WHERE Conference='{conference}' ORDER BY Nickname ASC;")
-        return cursor.fetchall()
+        open_database()
+        res=executeSelect(f"SELECT * FROM Team WHERE Conference='{conference}' ORDER BY Nickname ASC;")
+        print(res)
+        close_db()
+        
 
 def view_games_by_team(team_id): 
-        cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id};")
-        return cursor.fetchall()
+        res=executeSelect(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id};")
+        print(res)
+        close_db()
 
 def view_results_by_date(date):
-        cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t2.Nickname,' Won')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.date= '{date}';")
-        return cursor.fetchall()
+        open_database()
+        res=executeSelect(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t2.Nickname,' Won')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.date= '{date}';")
+        print(res)
+        close_db()
 
 def bonus(team_id):
-  cursor.execute(f"SELECT g.Date, t1.Location, t1.Nickname, p1.Name, p1.Position, g.Score1, t2.Location, t2.Nickname,p2.Name, p2.position, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 JOIN Player p1 on p1.TeamId= t1.TeamId JOIN Player p2 on p2.TeamId= t2.TeamId WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id};")
-  return cursor.fetchall()
+  open_database()
+  res=executeSelect(f"SELECT g.Date, t1.Location, t1.Nickname, p1.Name, p1.Position, g.Score1, t2.Location, t2.Nickname,p2.Name, p2.position, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 JOIN Player p1 on p1.TeamId= t1.TeamId JOIN Player p2 on p2.TeamId= t2.TeamId WHERE g.TeamId1= {team_id} OR g.teamId2= {team_id};")
+  print(res)
 
 def nextId(table):
     query = "select IFNULL(max(ID), 0) as max_id from " + table
