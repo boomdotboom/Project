@@ -3,8 +3,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Game</title>
-    <link rel="stylesheet" type="text/css" href="../style/add_game.css"> 
-    <link rel="stylesheet" type="text/css" href="../style/carousel.css"> 
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/substyles.css">
 </head>
