@@ -5,6 +5,7 @@ import Sports
 
 try:
     Sports.open_database('localhost','aemorton','eT5wisee','aemorton') # open database
+    
     gameID = sys.argv[1]
     date = sys.argv[2]
     team1 = sys.argv[3]
