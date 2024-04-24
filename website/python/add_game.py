@@ -7,9 +7,9 @@ def add_game(gameID, date, team1, score1, team2, score2):
     try:
         Sports.open_database()  # open database
         
-        next_id = Sports.nextId("Game")
+        #next_id = Sports.nextId("Game")
         
-        values = "'"+ str(next_id) + "','" + date  + "','" +  team1 + "','" + team2 + "','" + score1 + "','" + score2 + "','" + date + "'"
+        values = "'"+ gameID + "','" + date  + "','" +  team1 + "','" + team2 + "','" + score1 + "','" + score2 + "','" + date + "'"
 
         Sports.insert("Game", values)
         res = Sports.executeSelect('SELECT * FROM Game;')
