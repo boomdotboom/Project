@@ -73,10 +73,9 @@ if (isset($_POST['submit']))
 
     $command = 'python3 add_game.py ' . $gameID . ' ' . $date . ' ' . $team1 . ' ' . $score1. ' '  . $team2. ' '  . $score2;
 
-    // remove dangerous characters from command to protect web server
     $escaped_command = escapeshellcmd($command);
     echo "<p>command: $command <p>"; 
-    // run insert_new_item.py
+    
     system($escaped_command);           
 }
 ?>
