@@ -74,6 +74,7 @@ if (isset($_POST['submit']))
     $escaped_command = escapeshellcmd($command);
     echo "<p>command: $command <p>"; 
     
-    system($escaped_command);           
+    
+    system($escaped_command);          
 }
 ?>

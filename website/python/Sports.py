@@ -137,7 +137,7 @@ def view_games_by_team(team_id):
 def view_results_by_date(date):
         open_database()
         res=executeSelect(f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t2.Nickname,' Won')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.date= '{date}';")
-        print(res)
+        print("<p>"+res+"<p>")
         close_db()
 
 def bonus(team_id):

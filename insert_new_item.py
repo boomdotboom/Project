@@ -26,7 +26,7 @@ try:
     quantity = sys.argv[3]
     unit_price = sys.argv[4]
 
-    # next_id = python_db.nextId("ITEM")
+    next_id = python_db.nextId("ITEM")
 
 
     values = "'"+ name + "','" + str(next_id) + "','" +  supplier_id + \
