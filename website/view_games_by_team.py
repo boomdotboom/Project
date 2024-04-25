@@ -9,7 +9,7 @@ mysql_password = 'eT5wisee'
 try:
     Sports.open_database('localhost', mysql_username, mysql_password, mysql_username)  # open database
     team = sys.argv[1]
-    query = f"SELECT Nickname, Name FROM Team t NATURAL JOIN Player p WHERE t.Nickname = '{team}';"
+    query = f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE t1.Nickname= '{team}' OR t2.Nickname= '{team}';"
     
     res = Sports.executeSelect(query)
     rows = [tuple(row.split(' ', 1)) for row in res.split('\n')[2:] if row.strip()]  # Split each row by the first space and remove header and empty rows
@@ -26,7 +26,7 @@ try:
     </style>
     <body>
 
-    <h2>Team Players</h2>
+    <h2>Games by team</h2>
 
     <table style="width:100%">
     <tr>
@@ -43,5 +43,5 @@ try:
     print(html_content)
     Sports.close_db()  # close db
 except Exception as e:
-    print("Error in add_game.py")
+    print("Error in view_games_by_team.py")
     logging.error(traceback.format_exc())

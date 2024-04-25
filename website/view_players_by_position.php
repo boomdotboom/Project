@@ -13,7 +13,7 @@
 
             <div class="form-group">
                 <label for="position">Position:</label>
-                <input type="text" id="position" name="position" required><br><br>
+                
             </div>
             <button type="submit">Submit</button>
         </form>

@@ -48,12 +48,12 @@
 
     <button type="submit" form="playersForm">View Players</button>
 
-    <form id="playersForm" action="view_players.php" method="POST">
+    <form id="playersForm" action="view_games_by_team.php" method="POST">
         <input type="hidden" name="submit" value="1"> <!-- Adding a hidden input field named "submit" -->
         <input type="hidden" name="team_id1" id="selectedTeam">
     </form>
 
-    <button onclick="location.href='../index.html';" class="back-btn">Home</button>
+    <button onclick="location.href='../home.html';" class="back-btn">Home</button>
 
     <script>
         function updateSelectedTeam() {
@@ -69,10 +69,10 @@
 if (isset($_POST['submit'])) 
 {
     // add ' ' around multiple strings so they are treated as single command line args
-    $data = escapeshellarg($_POST['teamID']); #data
+    $data = escapeshellarg($_POST['team_id1']); #data
 
     // build the linux command that you want executed;  
-    $command = 'python3 view_game_by_team.py ' . $data;
+    $command = 'python3 view_games_by_team.py ' . $data;
 
     // remove dangerous characters from command to protect web server
     $command = escapeshellcmd($command);
