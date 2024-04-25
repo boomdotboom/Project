@@ -1,16 +1,15 @@
 import mysql.connector
 from tabulate import tabulate
 
-def open_database(host, user, password, database):
-    global mydb
-    mydb = mysql.connector.connect(
-    host=host,
-    user= user,
-    password=password, #"eT5wisee"
-    database= database
-    ) 
+def open_database(hostname, user_name, mysql_pw, database_name):
+    global conn
+    conn = mysql.connector.connect(host=hostname,
+                                   user=user_name,
+                                   password=mysql_pw,
+                                   database=database_name
+                                   )
     global cursor
-    cursor = mydb.cursor()
+    cursor = conn.cursor()
 
 
 def create_tables():
@@ -92,11 +91,11 @@ def create_tables():
                        (4,31,'Kyle Allen','Quarterback'),(22,31,'Najee Harris','Running back'),(33,31,'Nathan Meadors','Safety'),
                        (8,32,'Will Levis','Quarterback'),(36,32,'Julius Chestnut','Running back'),(44,32,'Mike Brown','Safety');
                        ''')
-        mydb.commit()
+        conn.commit()
 # def add_game(game_id, date, team1_id, score1,team2_id, score2):
 #         open_database('localhost','aemorton','eT5wisee','aemorton')
 #         cursor.execute(f"INSERT INTO Game (GameId,Date, TeamId1,Score1, TeamId2, Score2) VALUES ({game_id},'{date}',{team1_id},{score1},{team2_id},{score2});")
-#         mydb.commit()
+#         conn.commit()
 #         res = executeSelect('SELECT * FROM Game')
 #         res = res.split('\n')  # split the header and data for printing
 #         print("<br/>" + "<br/>")
@@ -109,7 +108,7 @@ def create_tables():
 # def add_player(player_id,team_id, name, position):
 #         open_database('localhost','aemorton','eT5wisee','aemorton')
 #         cursor.execute(f"INSERT INTO Player (PlayerID ,TeamId, Name, Position) VALUES ({player_id},{team_id},'{name}', '{position}');")
-#         mydb.commit()
+#         conn.commit()
 #         res=executeSelect('SELECT * FROM Player')
 #         res = res.split('\n')  # split the header and data for printing
 #         print("<br/>" + "<br/>")
@@ -209,8 +208,8 @@ def printFormat(result):
 def insert(table, values):
     query = "INSERT into " + table + " values (" + values + ")" + ';'
     cursor.execute(query)
-    mydb.commit()
+    conn.commit()
 
 def close_db():
     cursor.close()
-    mydb.close()
+    conn.close()
