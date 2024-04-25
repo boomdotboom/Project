@@ -43,5 +43,5 @@ try:
     print(html_content)
     Sports.close_db()  # close db
 except Exception as e:
-    print("Error in add_game.py")
+    print("Error in view_players.py")
     logging.error(traceback.format_exc())
