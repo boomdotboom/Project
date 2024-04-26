@@ -7,7 +7,7 @@
     <title>View Games By Team</title>
 </head>
 <body>
-    <h1>Players on NFL Team</h1>
+    <h1>Games By Team</h1>
 
     <label for="teamSelect">Select a Team:</label>
     <select id="teamSelect" name="team" onchange="updateSelectedTeam()">
@@ -46,14 +46,14 @@
         <option value="vikings">Minnesota Vikings</option>
     </select>    
 
-    <button type="submit" form="playersForm">View Players</button>
+    <button type="submit" form="playersForm">View Games</button>
 
     <form id="playersForm" action="view_games_by_team.php" method="POST">
         <input type="hidden" name="submit" value="1"> <!-- Adding a hidden input field named "submit" -->
         <input type="hidden" name="team_id1" id="selectedTeam">
     </form>
 
-    <button onclick="location.href='../home.html';" class="back-btn">Home</button>
+    <button onclick="location.href='home.html';" class="back-btn">Home</button>
 
     <script>
         function updateSelectedTeam() {

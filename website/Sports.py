@@ -193,7 +193,7 @@ def nextId(table):
 
 def executeSelect(query):
     cursor.execute(query)
-    res = printFormat(cursor.fetchall())
+    res = (cursor.fetchall())
     return res
 
 def printFormat(result):
