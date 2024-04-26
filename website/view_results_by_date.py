@@ -8,11 +8,10 @@ mysql_password = 'eT5wisee'
 
 try:
     Sports.open_database('localhost', mysql_username, mysql_password, mysql_username)  # open database
-    team = sys.argv[1]
-    query = f"SELECT Nickname, Name FROM Team t NATURAL JOIN Player p WHERE t.Nickname = '{team}';"
+    date = sys.argv[1]
+    query = f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t2.Nickname,' Won')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.date= '{date}';"
     
     res = Sports.executeSelect(query)
-    rows = [tuple(row.split(' ', 1)) for row in res.split('\n')[2:] if row.strip()]  # Split each row by the first space and remove header and empty rows
     
     html_content = f'''
     <!DOCTYPE html>
@@ -30,10 +29,16 @@ try:
 
     <table style="width:100%">
     <tr>
-        <th>Team Name</th>
-        <th>Player Name</th>
+        <th>Date</th>
+        <th>Team1 Location</th>
+        <th>Team1 Nickname</th>
+        <th>Team1 Score</th>
+        <th>Team2 Location</th>
+        <th>Team2 Nickname</th>
+        <th>Team2 Score</th>
+        <th>Results</th>
     </tr>
-    {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td></tr>' for row in rows])}
+     {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td><td>{row[3]}</td><td>{row[4]}</td><td>{row[5]}</td><td>{row[6]}</td><td>{row[7]}</td></tr>' for row in res])}
     </table>
 
     </body>

@@ -64,7 +64,7 @@ if (isset($_POST['playerID']) && isset($_POST['teamId']) && isset($_POST['player
     // remove dangerous characters from command to protect web server
     $escaped_command = escapeshellcmd($command);
     // Wrapping echoed message in a div with centering class
-    echo '<div class="centered"><p>command: ' . $command . '</p></div>'; 
+    #echo '<div class="centered"><p>command: ' . $command . '</p></div>'; 
     // run insert_new_item.py
     system($escaped_command);          
 }

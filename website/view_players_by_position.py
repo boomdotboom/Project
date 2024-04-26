@@ -9,7 +9,7 @@ mysql_password = 'eT5wisee'
 try:
     Sports.open_database('localhost', mysql_username, mysql_password, mysql_username)  # open database
     position = sys.argv[1]
-    query = f"SELECT Nickname, Name FROM Team t NATURAL JOIN Player p WHERE p.Position = '{position}';"
+    query = f"SELECT Nickname, Name FROM Team, Player WHERE Position = '{position}' AND Team.TeamId= Player.TeamId;"
     
     res = Sports.executeSelect(query)
     

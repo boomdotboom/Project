@@ -12,7 +12,6 @@ try:
     query = f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t1.Nickname,' Lost')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE t1.Nickname= '{team}' OR t2.Nickname= '{team}';"
     
     res = Sports.executeSelect(query) 
-# Split each row by the first space and remove header and empty rows
     html_content = f'''
     <!DOCTYPE html>
     <html>
@@ -25,7 +24,7 @@ try:
     </style>
     <body>
 
-    <h2>Games by team</h2>
+    <h2>Games for {team}</h2>
 
     <table style="width:100%">
     <tr>
