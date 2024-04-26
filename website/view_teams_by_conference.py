@@ -9,7 +9,7 @@ mysql_password = 'eT5wisee'
 try:
     Sports.open_database('localhost', mysql_username, mysql_password, mysql_username)  # open database
     conference = sys.argv[1]
-    query = f"SELECT t.NickName, g.Score1, g.Score2 FROM Team t Join Game g on t.TeamId=g.TeamId1 Or t.teamId= g.TeamId2 WHERE Conference='{conference}' ORDER BY Nickname ASC;"
+    query = f"SELECT t1.Nickname, g.Score1, g.Score2, t2.Nickname FROM Game g Join Team t1 on t1.TeamId=g.TeamId1 Join Team t2 on t2.TeamId=g.TeamId2 WHERE t1.Conference='{conference}';"
     
     res = Sports.executeSelect(query)
     
@@ -30,10 +30,11 @@ try:
     <table style="width:100%">
     <tr>
         <th>Team Name</th>
-        <th>Score1 </th>
-        <th>Score2 </th>
+        <th>Score1</th>
+        <th>Score2</th>
+        <th>Team Name</th>
     </tr>
-    {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td></tr>' for row in res])}
+    {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td><td>{row[3]}</td></tr>' for row in res])}
     </table>
 
     </body>
