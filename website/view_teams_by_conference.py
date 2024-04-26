@@ -8,11 +8,10 @@ mysql_password = 'eT5wisee'
 
 try:
     Sports.open_database('localhost', mysql_username, mysql_password, mysql_username)  # open database
-    team = sys.argv[1]
-    query = f"SELECT Nickname, Name FROM Team t NATURAL JOIN Player p WHERE t.Nickname = '{team}';"
+    conference = sys.argv[1]
+    query = f"SELECT t.NickName, g.Score1, g.Score2 FROM Team t Join Game g on t.TeamId=g.TeamId1 Or t.teamId= g.TeamId2 WHERE Conference='{conference}' ORDER BY Nickname ASC;"
     
     res = Sports.executeSelect(query)
-    rows = [tuple(row.split(' ', 1)) for row in res.split('\n')[2:] if row.strip()]  # Split each row by the first space and remove header and empty rows
     
     html_content = f'''
     <!DOCTYPE html>
@@ -31,9 +30,10 @@ try:
     <table style="width:100%">
     <tr>
         <th>Team Name</th>
-        <th>Player Name</th>
+        <th>Score1 </th>
+        <th>Score2 </th>
     </tr>
-    {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td></tr>' for row in rows])}
+    {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td></tr>' for row in res])}
     </table>
 
     </body>
