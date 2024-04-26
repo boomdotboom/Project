@@ -1,58 +1,48 @@
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results by Date</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/substyles.css">
-    <title>View Results By Date</title>
 </head>
 <body>
-    <div class="options-box">
-        <h1>View Results By Date</h1>
-        <form action="view_results_by_date.php" method="post">
+    <h1>Results on a Given Date</h1>
 
-            <div class="form-group">
-                <label for="date">Date:</label>
-                <input type="date" id="date" name="date" required><br><br>
-            </div>
+    <label for="dateSelect">Select a Date:</label>
+    <input type="date" id="date" name="date">
+    
+    <button type="submit" form="gamesForm">View Results</button>
 
-            <button type="submit">Submit</button>
+    <form id="gamesForm" action="view_results_by_date.php" method="POST" onsubmit="updateSelectedDate()">
+        <input type="hidden" name="submit" value="1"> 
+        <input type="hidden" name="date" id="dateSelect"> 
+    </form>
 
-        </form>
-    </div>
-    <a href="home.html">Home</a>
+    <button onclick="location.href='home.html';" class="back-btn">Home</button>
 
     <script>
-        function validateForm() {
-            var form = document.getElementById("findGamesbyDateForm");
-            var inputs = form.getElementsByTagName("input");
-            for (var i = 0; i < inputs.length; i++) {
-                if (inputs[i].value.trim() === "") {
-                    alert("Please fill out all the fields.");
-                    return false;
-                }
-            }
-            return true;
+        function updateSelectedDate() {
+            var dateSelect = document.getElementById("date");
+            var selectedDate = dateSelect.value;
+            document.getElementById("dateSelect").value = selectedDate;
         }
     </script>
 </body>
 </html>
 
-
 <?php
-if (isset($_POST['date'])) 
+if (isset($_POST['submit'])) 
 {
-    // add ' ' around multiple strings so they are treated as single command line args
-    $data = escapeshellarg($_POST['date']); #data
+    // replace ' ' with '\ ' in the strings so they are treated as single command line args
+    $date = escapeshellarg($_POST['date']);
 
-    // build the linux command that you want executed;  
-    $command = 'python3 view_results_by_date.py ' . $data;
+    $command = 'python3 view_results_by_date.py ' . $date;
 
     // remove dangerous characters from command to protect web server
-    $command = escapeshellcmd($command);
- 
-    // echo then run the command
-    echo "command: $command <br>";
-    system($command);           
+    $escaped_command = escapeshellcmd($command);
+    echo "<p>command: $command <p>"; 
+    // run insert_new_item.py
+    system($escaped_command);           
 }
 ?>
