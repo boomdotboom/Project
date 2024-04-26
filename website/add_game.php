@@ -72,7 +72,7 @@ if (isset($_POST['gameID'])&& isset($_POST['date'])&& isset($_POST['team1'])&&is
     $command = 'python3 add_game.py ' . $gameID . ' ' . $date . ' ' . $team1 . ' ' . $score1. ' '  . $team2. ' '  . $score2;
 
     $escaped_command = escapeshellcmd($command);
-    echo "<p>command: $command <p>"; 
+    #echo "<p>command: $command <p>"; 
     
     
     system($escaped_command);          
