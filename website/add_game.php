@@ -35,7 +35,7 @@
                 <input type="text" id="score2" name="score2" required>
             </div>
             
-            <button name="submit" type="submit" >
+            <button name="submit" type="submit" >Submit</button>
         </form>
     </div>
 

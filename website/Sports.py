@@ -97,18 +97,9 @@ def add_game(game_id, date, team1_id, score1,team2_id, score2):
         conn.commit()
     
 
-# def add_player(player_id,team_id, name, position):
-#         open_database('localhost','aemorton','eT5wisee','aemorton')
-#         cursor.execute(f"INSERT INTO Player (PlayerID ,TeamId, Name, Position) VALUES ({player_id},{team_id},'{name}', '{position}');")
-#         conn.commit()
-#         res=executeSelect('SELECT * FROM Player')
-#         res = res.split('\n')  # split the header and data for printing
-#         print("<br/>" + "<br/>")
-#         print("<br/>" + "Table Player after:"+"<br/>" +
-#                 res[0] + "<br/>"+res[1] + "<br/>")
-#         for i in range(len(res)-2):
-#                 print(res[i+2]+"<br/>")
-#         close_db()
+def add_player(player_id,team_id, name, position):
+        cursor.execute(f"INSERT INTO Player (PlayerID ,TeamId, Name, Position) VALUES ({player_id},{team_id},'{name}', '{position}');")
+        conn.commit()
 
 # def view_players_on_team(team_id):
 #         open_database('localhost','aemorton','eT5wisee','aemorton')

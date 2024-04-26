@@ -40,7 +40,7 @@
 
 
 <?php
-if (isset($_POST['submit'])) 
+if (isset($_POST['date'])) 
 {
     // add ' ' around multiple strings so they are treated as single command line args
     $data = escapeshellarg($_POST['date']); #data

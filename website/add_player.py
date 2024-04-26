@@ -8,11 +8,13 @@ mysql_password = 'eT5wisee'
 
 try:
     Sports.open_database('localhost', mysql_username, mysql_password, mysql_username)  # open database
-    team = sys.argv[1]
-    query = f"SELECT Nickname, Name FROM Team t NATURAL JOIN Player p WHERE t.Nickname = '{team}';"
-    
-    res = Sports.executeSelect(query)
-    rows = [tuple(row.split(' ', 1)) for row in res.split('\n')[2:] if row.strip()]  # Split each row by the first space and remove header and empty rows
+    playerID = sys.argv[1]
+    teamID = sys.argv[2]
+    name = sys.argv[3]
+    position= sys.argv[4]
+    Sports.add_player(playerID,teamID,name,position)
+    query=f"Select t.Location,t.Nickname,p.Name,p.position From Player p Join Team t on t.TeamId=p.TeamId Where p.Name='{name}';"
+    res=Sports.executeSelect(query)  # Split each row by the first space and remove header and empty rows
     
     html_content = f'''
     <!DOCTYPE html>
@@ -26,14 +28,16 @@ try:
     </style>
     <body>
 
-    <h2>Team Players</h2>
+    <h2>Player Added</h2>
 
     <table style="width:100%">
     <tr>
+        <th>Location</th>
         <th>Team Name</th>
-        <th>Player Name</th>
+        <th>Name</th>
+        <th>Position</th>
     </tr>
-    {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td></tr>' for row in rows])}
+    {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td><td>{row[3]}</td></tr>' for row in res])}
     </table>
 
     </body>
