@@ -41,7 +41,7 @@ if (isset($_POST['submit']))
 
     // remove dangerous characters from command to protect web server
     $escaped_command = escapeshellcmd($command);
-    echo "<p>command: $command <p>"; 
+    #echo "<p>command: $command <p>"; 
     // run insert_new_item.py
     system($escaped_command);           
 }

@@ -8,9 +8,7 @@ mysql_password = 'eT5wisee'
 
 try:
     Sports.open_database('localhost', mysql_username, mysql_password, mysql_username)  # open database
-    print("open")
     date = sys.argv[1]
-    print('query')
     query = f"SELECT g.Date, t1.Location, t1.Nickname, g.Score1, t2.Location, t2.Nickname, g.Score2, IF(g.Score1>g.Score2, Concat(t1.Nickname,' Won'),Concat(t2.Nickname,' Won')) AS Result FROM Game g JOIN Team t1 on t1.TeamId= g.TeamId1 JOIN Team t2 on t2.TeamId= g.TeamId2 WHERE g.date= '{date}';"
     
     res = Sports.executeSelect(query)
