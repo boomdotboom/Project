@@ -76,7 +76,7 @@ if (isset($_POST['submit']))
     $command = 'python3 view_players_by_team.py ' . $data;
 
     // remove dangerous characters from command to protect web server
-    $command = escapeshellcmd($command);
+    //$command = escapeshellcmd($command);
  
     // echo then run the command
     echo "command: $command <br>";

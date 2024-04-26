@@ -12,7 +12,7 @@ try:
     query = f"SELECT Nickname, Name FROM Team t NATURAL JOIN Player p WHERE t.Nickname = '{team}';"
     
     res = Sports.executeSelect(query)
-    rows = [tuple(row.split(' ', 1)) for row in res.split('\n')[2:] if row.strip()]  # Split each row by the first space and remove header and empty rows
+# Split each row by the first space and remove header and empty rows
     
     html_content = f'''
     <!DOCTYPE html>
@@ -33,7 +33,7 @@ try:
         <th>Team Name</th>
         <th>Player Name</th>
     </tr>
-    {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td></tr>' for row in rows])}
+    {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td></tr>' for row in res])}
     </table>
 
     </body>
