@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/substyles.css">
-    <title>View Teams</title>
+    <title>View Conference Record</title>
 </head>
 <body>
-    <h1>Players on NFL Team</h1>
+    <h1>Conference</h1>
 
     <label for="ConferenceSelect">Select a Conference:</label>
     <select id="ConferenceSelect" name="Conference" onchange="updateSelectedConference()">
@@ -18,7 +18,7 @@
 
     <button type="submit" form="playersForm">View Conferences</button>
 
-    <form id="playersForm" action="view_teams_by_conference.php" method="POST">
+    <form id="playersForm" action="view__by_conference.php" method="POST">
         <input type="hidden" name="submit" value="1"> <!-- Adding a hidden input field named "submit" -->
         <input type="hidden" name="conference" id="selectedConference">
     </form>
