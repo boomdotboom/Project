@@ -9,11 +9,8 @@ mysql_password = 'eT5wisee'
 try:
     Sports.open_database('localhost', mysql_username, mysql_password, mysql_username)  # open database
     conference = sys.argv[1]
-    query = f"SELECT t2.Nickname, g.Score2, IF(g.Score1<g.Score2,COUNT(t2.Nickname),0)As Record FROM Game g Join Team t2 on t2.TeamId=g.TeamId2 WHERE t2.Conference='NFC' Group by g.TeamId2,g.Score1,g.Score2;"
-    
+    query = f"SELECT t2.Nickname,SUM(IF(g.Score1 < g.Score2, 1, 0)) AS Record  FROM Game g, Team t2 WHERE t2.TeamId = g.TeamId2 OR t2.TeamId=g.TeamId1 AND t2.Conference = '{conference}' GROUP BY t2.Nickname;"
     res = Sports.executeSelect(query)
-    query2= f"SELECT t1.Nickname, g.Score1, IF(g.Score1>g.Score2,COUNT(t1.Nickname),0)As Record FROM Game g Join Team t1 on t1.TeamId=g.TeamId1 WHERE t1.Conference='NFC' Group by g.TeamId1,g.Score1,g.Score2;"
-    res2= Sports.executeSelect(query2)
     html_content = f'''
     <!DOCTYPE html>
     <html>
@@ -31,11 +28,9 @@ try:
     <table style="width:100%">
     <tr>
         <th>Team Name</th>
-        <th>Score</th>
         <th>Result</th>
     </tr>
-    {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td></tr>' for row in res])}
-    {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td></tr>' for row in res2])}
+    {''.join([f'<tr><td>{row[0]}</td><td>{row[1]}</td></tr>' for row in res])}
     </table>
 
     </body>
@@ -45,5 +40,5 @@ try:
     print(html_content)
     Sports.close_db()  # close db
 except Exception as e:
-    print("Error in add_game.py")
+    print("Error in view_teams_by_conference.py")
     logging.error(traceback.format_exc())

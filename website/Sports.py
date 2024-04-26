@@ -92,18 +92,10 @@ def create_tables():
                        (8,32,'Will Levis','Quarterback'),(36,32,'Julius Chestnut','Running back'),(44,32,'Mike Brown','Safety');
                        ''')
         conn.commit()
-# def add_game(game_id, date, team1_id, score1,team2_id, score2):
-#         open_database('localhost','aemorton','eT5wisee','aemorton')
-#         cursor.execute(f"INSERT INTO Game (GameId,Date, TeamId1,Score1, TeamId2, Score2) VALUES ({game_id},'{date}',{team1_id},{score1},{team2_id},{score2});")
-#         conn.commit()
-#         res = executeSelect('SELECT * FROM Game')
-#         res = res.split('\n')  # split the header and data for printing
-#         print("<br/>" + "<br/>")
-#         print("<br/>" + "Table Player after:"+"<br/>" +
-#                 res[0] + "<br/>"+res[1] + "<br/>")
-#         for i in range(len(res)-2):
-#                 print(res[i+2]+"<br/>")
-#         close_db()      
+def add_game(game_id, date, team1_id, score1,team2_id, score2):
+        cursor.execute(f"INSERT INTO Game (GameId,Date, TeamId1,Score1, TeamId2, Score2) VALUES ({game_id},'{date}',{team1_id},{score1},{team2_id},{score2});")
+        conn.commit()
+    
 
 # def add_player(player_id,team_id, name, position):
 #         open_database('localhost','aemorton','eT5wisee','aemorton')
