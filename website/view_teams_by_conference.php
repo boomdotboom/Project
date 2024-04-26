@@ -7,7 +7,7 @@
     <title>View Conference Record</title>
 </head>
 <body>
-    <h1>Conference</h1>
+    <h1>View Conference Record</h1>
 
     <label for="ConferenceSelect">Select a Conference:</label>
     <select id="ConferenceSelect" name="Conference" onchange="updateSelectedConference()">
