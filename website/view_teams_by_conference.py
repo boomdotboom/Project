@@ -9,7 +9,7 @@ mysql_password = 'eT5wisee'
 try:
     Sports.open_database('localhost', mysql_username, mysql_password, mysql_username)  # open database
     conference = sys.argv[1]
-    query = f"SELECT t2.Nickname,SUM(IF(g.Score1 < g.Score2, 1, 0)) AS Record FROM Game g, Team t2 WHERE t2.TeamId = g.TeamId2 OR t2.TeamId=g.TeamId1 AND t2.Conference = '{conference}' GROUP BY t2.Nickname;"
+    query = f"SELECT t2.Nickname,SUM(IF(g.Score1 < g.Score2, 1, 0)) AS Record FROM Game g, Team t2 WHERE (t2.TeamId = g.TeamId2 OR t2.TeamId=g.TeamId1) AND t2.Conference = '{conference}' GROUP BY t2.Nickname;"
     res = Sports.executeSelect(query)
     html_content = f'''
     <!DOCTYPE html>
